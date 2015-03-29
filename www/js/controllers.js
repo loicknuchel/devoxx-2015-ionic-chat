@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, RoomSrv, UserSrv){
+.controller('AppCtrl', function($scope, RoomSrv, UserSrv, UserUI){
   'user strict';
   var onMessageRef = null;
   $scope.messages = [];
@@ -27,9 +27,19 @@ angular.module('app')
     RoomSrv.sendMessage(message);
     $scope.message = '';
   };
+
+  $scope.changeUserName = function(){
+    var user = UserSrv.get();
+    UserUI.changeName(user.name).then(function(newName){
+      if(newName){
+        user.name = newName;
+        UserSrv.set(user);
+      }
+    });
+  };
 })
 
-.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv){
+.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv, UserUI){
   'user strict';
   $scope.messages = null;
 
@@ -47,5 +57,15 @@ angular.module('app')
     };
     RoomSrv2.sendMessage($scope.messages, message);
     $scope.message = '';
+  };
+
+  $scope.changeUserName = function(){
+    var user = UserSrv.get();
+    UserUI.changeName(user.name).then(function(newName){
+      if(newName){
+        user.name = newName;
+        UserSrv.set(user);
+      }
+    });
   };
 });

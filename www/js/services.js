@@ -21,6 +21,38 @@ angular.module('app')
   return service;
 })
 
+
+.factory('UserUI', function($rootScope, $ionicPopup){
+  'use strict';
+  var service = {
+    changeName: changeName
+  };
+
+  function changeName(currentName){
+    var popupScope = $rootScope.$new(true);
+    popupScope.data = {
+      userName: currentName
+    };
+    return $ionicPopup.show({
+      template: '<input type="text" ng-model="data.userName" autofocus>',
+      title: 'Votre nom :',
+      scope: popupScope,
+      buttons: [
+        { text: 'Annuler' },
+        {
+          text: '<b>Modifier</b>',
+          type: 'button-positive',
+          onTap: function(e){
+            return popupScope.data.userName;
+          }
+        },
+      ]
+    });
+  }
+
+  return service;
+})
+
 // see https://www.firebase.com/docs/web/api/
 .factory('RoomSrv', function(Config){
   'user strict';

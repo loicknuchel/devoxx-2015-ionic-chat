@@ -1,5 +1,9 @@
 <ion-view view-title="Chat">
-  <ion-nav-bar class="bar-positive"></ion-nav-bar>
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-buttons side="right">
+      <button class="button button-clear icon ion-person" ng-click="changeUserName()"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-content>
     <ion-list>
       <ion-item class="item-avatar" ng-repeat="message in messages">

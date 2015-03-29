@@ -181,6 +181,7 @@ Voici quelques exemples :
 - **NameStorage** : service permettant de requêter de la donnée vers le stockage local
 - **NameBackend** : service permettant de requêter de la donnée vers son backend
 - **NameCache** : service de cache
+- **NameUI** : service pour manipuler des éléments d'interface
 - **NameSrv** : service 'haut-niveau' permettant d'agréger intelligemment plusieurs autres services. *Ex*: `UserSrv` peut dépendre de `UserStorage`, `UserBackend`, `UserCache` et `UserUtils`. Il récupère les utilisateurs en cache puis en local et enfin à distance en fonction des possibilités du moment et les organise/formate comme il faut. C'est le service qui sera utilisé dans les contrôleurs car il masque la complexité de la tâche `getUsers()`.
 
 Bien sûr, toutes ces conventions sont à utiliser judicieusement en fonction du contexte...
