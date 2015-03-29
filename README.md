@@ -140,6 +140,8 @@ Parler tous ensemble c'est bien mais ce serait bien d'avoir des sujets précis e
 
 Commençons par mettre en place un [side-menu](http://ionicframework.com/docs/api/directive/ionSideMenus/). Pour cela il va falloir créer un état abstrait et un [état imbriqué](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views) à notre application et renommer l'état courant pour garder un peu de cohérence.
 
+Résultat : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](screenshots/step6-2.png)
+
 ### Étape 7 : Préparation du multi-room : afficher et ajouter des rooms dans le side-menu
 
 ### Étape 8 : Finalisation du multi-room : changer de room
