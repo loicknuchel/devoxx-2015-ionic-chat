@@ -4,10 +4,20 @@ angular.module('app', ['ionic', 'firebase', 'angularMoment'])
   $stateProvider
   .state('app', {
     url: '/app',
-    templateUrl: 'views/app.html',
+    abstract: true,
+    templateUrl: 'views/menu.html',
     controller: 'AppCtrl'
+  })
+  .state('app.room', {
+    url: '/room',
+    views: {
+      'menuContent': {
+        templateUrl: 'views/room.html',
+        controller: 'RoomCtrl'
+      }
+    }
   });
-  $urlRouterProvider.otherwise('/app');
+  $urlRouterProvider.otherwise('/app/room');
 })
 
 .constant('Config', {

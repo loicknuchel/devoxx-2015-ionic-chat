@@ -1,6 +1,10 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, RoomSrv, UserSrv, RoomUI, UserUI){
+.controller('AppCtrl', function(){
+  'user strict';
+})
+
+.controller('RoomCtrl', function($scope, RoomSrv, UserSrv, RoomUI, UserUI){
   'user strict';
   var onMessageRef = null;
   $scope.messages = [];
@@ -44,7 +48,7 @@ angular.module('app')
   };
 })
 
-.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv, RoomUI, UserUI){
+.controller('RoomCtrl2', function($scope, RoomSrv2, UserSrv, RoomUI, UserUI){
   'user strict';
   $scope.messages = null;
 
