@@ -131,3 +131,5 @@ Tant qu'on est sur les petites améliorations, tu as peut être remarqué que me
 Bonne idée ? Mauvaise idée ? En tous cas, on y va !!!
 
 Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'utilisateur fait un appui long dessus. Pour que ce ne soit pas innatendu par l'utilisateur, un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) pourrait être le bienvenu :)
+
+![Screen step5](screenshots/step5.png)
