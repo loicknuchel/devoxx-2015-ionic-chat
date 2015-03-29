@@ -3,7 +3,7 @@ angular.module('app')
 .factory('UserSrv', function(Storage){
   'use strict';
   var userKey = 'user';
-  var userCache = Storage.get(userKey) || {name: 'Slimer', avatar: 'http://ionicframework.com/img/docs/slimer.jpg'};
+  var userCache = Storage.get(userKey) || {name: 'Anonymous'};
   var service = {
     get: get,
     set: set
