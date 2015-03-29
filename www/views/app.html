@@ -9,4 +9,12 @@
       </ion-item>
     </ion-list>
   </ion-content>
+
+  <ion-footer-bar class="item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios7-search placeholder-icon"></i>
+      <input type="search" placeholder="Message" ng-model="message">
+    </label>
+    <button type="submit" class="button button-clear" ng-click="sendMessage()">Envoyer</button>
+  </ion-footer-bar>
 </ion-view>

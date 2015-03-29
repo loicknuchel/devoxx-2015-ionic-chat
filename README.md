@@ -67,3 +67,5 @@ Commençons par la liste des messages. Tout d'abord, il va falloir prendre des d
 ```
 
 Tu as une super liste ? Bravo !
+
+Maintenant nous allons pouvoir créer le champ de text pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).

@@ -12,4 +12,14 @@ angular.module('app')
     {user: {avatar: 'http://ionicframework.com/img/docs/barrett.jpg', name: 'Dana'}, content: 'I am The Gatekeeper!'},
     {user: {avatar: 'http://ionicframework.com/img/docs/slimer.jpg', name: 'Slimer'}, content: 'Boo!'}
   ];
+
+  $scope.sendMessage = function(){
+    $scope.messages.unshift({
+      user: {
+        avatar: 'http://ionicframework.com/img/docs/slimer.jpg',
+        name: 'Slimer'
+      },
+      content: $scope.message
+    });
+  };
 });
