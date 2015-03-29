@@ -74,3 +74,5 @@ Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il 
 
 - le message reste dans le champ de texte lorsqu'on l'envoi (il devrait disparaitre...)
 - si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé
+
+Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
