@@ -1,6 +1,12 @@
 <ion-view view-title="App">
   <ion-nav-bar class="bar-positive"></ion-nav-bar>
-  <ion-content class="padding">
-    Hello Ionic !
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-avatar" ng-repeat="message in messages">
+        <img ng-src="{{message.user.avatar}}">
+        <h2>{{message.user.name}}</h2>
+        <p>{{message.content}}</p>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

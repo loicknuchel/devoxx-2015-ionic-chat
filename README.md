@@ -33,7 +33,7 @@ cordova platform add [android/ios]
 ionic run
 ```
 
-### Étape 0
+### Étape 0 : mise en place de la structure de l'application
 
 Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réellement partir de 0, cette étape te permettra d'arriver au point de départ de ce repo.
 
@@ -48,3 +48,22 @@ Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réell
 - lance ton application dans le navigateur et sur ton téléphone :)
 
 Voici le résultat que tu devrais obtenir : ![Screen setp0](screenshots/step0.png)
+
+### Étape 1 : création de l'interface
+
+Il y a deux éléments principaux dans une application de chat, la liste des messages et le champ de texte pour envoyer un nouveau message.
+
+Commençons par la liste des messages. Tout d'abord, il va falloir prendre des données pour voir à quoi ressemblera cette liste. Voici quelques messages de test :
+```javascript
+[
+    {user: {avatar: 'http://ionicframework.com/img/docs/venkman.jpg', name: 'Venkman'}, content: 'Back off, man. I\'m a scientist.'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/spengler.jpg', name: 'Egon'}, content: 'We\'re gonna go full stream.'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/stantz.jpg', name: 'Ray'}, content: 'Ugly little spud, isn\'t he?'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/winston.jpg', name: 'Winston'}, content: 'That\'s a big Twinkie.'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/tully.jpg', name: 'Tully'}, content: 'Okay, who brought the dog?'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/barrett.jpg', name: 'Dana'}, content: 'I am The Gatekeeper!'},
+    {user: {avatar: 'http://ionicframework.com/img/docs/slimer.jpg', name: 'Slimer'}, content: 'Boo!'}
+]
+```
+
+Tu as une super liste ? Bravo !
