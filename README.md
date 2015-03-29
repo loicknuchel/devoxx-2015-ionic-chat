@@ -123,3 +123,5 @@ L'objectif de cette étape sera donc d'ajouter et d'afficher les dates sur les m
 Pour formater des dates, il y a l'excellente librairie [momentjs](http://momentjs.com/) et un wrapper pour angular [angular-moment](https://github.com/urish/angular-moment).
 
 Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)
+
+Tant qu'on est sur les petites améliorations, tu as peut être remarqué que messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
