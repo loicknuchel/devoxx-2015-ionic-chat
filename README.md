@@ -41,9 +41,10 @@ Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réell
 - ajoute ta plateforme et lance l'application sur ton téléphone
 - si l'application se lance, bravo !!! Tout fonctionne bien ! Sinon... :( Tu peux reprendre le [Getting Started](http://ionicframework.com/getting-started/) ou poser une question sur le [forum Ionic](http://forum.ionicframework.com/)
 - ajoute `www/lib/`, `resources/android/` et `resources/ios/` dans le .gitignore
-- renomme l'application angular de starter en app
+- renomme l'application angular de 'starter' en 'app'
 - crée les fichiers de contrôleurs et services et inclu les dans l'index.html
 - remplace le contenu du body par un unique nav view
 - crée une première route, app, avec son contrôleur et sa vue. La vue comportera simplement une barre de navigation avec un titre et un contenu vierge.
-- lance ton application dans le navigateur
-- ajoute ta plateforme et lance l'application sur ton téléphone :)
+- lance ton application dans le navigateur et sur ton téléphone :)
+
+Voici le résultat que tu devrais obtenir : ![Screen setp0](screenshots/step0.png)
