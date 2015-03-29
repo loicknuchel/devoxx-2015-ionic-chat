@@ -76,3 +76,28 @@ Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il 
 - si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé
 
 Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
+
+### Étape 2 : le backend
+
+Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone, pas encore moyen de communiquer... Réglons ce problème et attaquons nous maintenant au backend.
+
+Dans le cadre de cet atelier, nous allons utiliser [firebase](https://www.firebase.com/) comme base de données, mais [parse](https://parse.com/)+[pusher](https://pusher.com/) ou un backend custom ferait tout aussi bien l'affaire !
+
+Firebase est un Backend as a Service, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur et ce concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
+
+Tout d'abord, il faut créer une application sur firebase. Tu peux soit créer ta propre application (5 min) soit utiliser l'application que j'ai créé pour l'atelier (https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
+
+Ensuite, il faut installer la librairie firebase :
+
+- télécharger la librairie : `bower install firebase --save` (merci bower !)
+- l'inclure de la index.html : `<script src="lib/firebase/firebase.js"></script>`
+
+Il y a aussi une librairie spéciale pour angular, si tu veux l'utiliser (pas obligé) il faut aussi :
+
+- la télécharger : `bower install angularfire --save`
+- l'inclure dans le index.html `<script src="lib/angularfire/dist/angularfire.js"></script>`
+- et enfin, l'ajouter un dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])`
+
+Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https://www.firebase.com/docs/) !
+
+Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.

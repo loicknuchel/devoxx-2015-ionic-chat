@@ -1,26 +1,57 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope){
+.controller('AppCtrl', function($scope, RoomSrv){
   'user strict';
+  var onMessageRef = null;
+  $scope.messages = [];
 
-  $scope.messages = [
-    {user: {avatar: 'http://ionicframework.com/img/docs/venkman.jpg', name: 'Venkman'}, content: 'Back off, man. I\'m a scientist.'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/spengler.jpg', name: 'Egon'}, content: 'We\'re gonna go full stream.'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/stantz.jpg', name: 'Ray'}, content: 'Ugly little spud, isn\'t he?'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/winston.jpg', name: 'Winston'}, content: 'That\'s a big Twinkie.'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/tully.jpg', name: 'Tully'}, content: 'Okay, who brought the dog?'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/barrett.jpg', name: 'Dana'}, content: 'I am The Gatekeeper!'},
-    {user: {avatar: 'http://ionicframework.com/img/docs/slimer.jpg', name: 'Slimer'}, content: 'Boo!'}
-  ];
+  $scope.$on('$ionicView.enter', function(){
+    onMessageRef = RoomSrv.onMessage(function(message){
+      $scope.safeApply(function(){
+        $scope.messages.unshift(message);
+      });
+    });
+  });
+  $scope.$on('$ionicView.leave', function(){
+    if(onMessageRef !== null){
+      RoomSrv.offMessage(onMessageRef);
+      onMessageRef = null;
+    }
+  });
 
   $scope.sendMessage = function(){
-    $scope.messages.unshift({
+    var message = {
       user: {
         avatar: 'http://ionicframework.com/img/docs/slimer.jpg',
         name: 'Slimer'
       },
       content: $scope.message
-    });
+    };
+    RoomSrv.sendMessage(message);
+    $scope.message = '';
+  };
+})
+
+.controller('AppCtrl2', function($scope, RoomSrv2){
+  'user strict';
+  $scope.messages = null;
+
+  $scope.$on('$ionicView.enter', function(){
+    $scope.messages = RoomSrv2.getMessages();
+  });
+  $scope.$on('$ionicView.leave', function(){
+    RoomSrv2.destroy($scope.messages);
+  });
+
+  $scope.sendMessage = function(){
+    var message = {
+      user: {
+        avatar: 'http://ionicframework.com/img/docs/slimer.jpg',
+        name: 'Slimer'
+      },
+      content: $scope.message
+    };
+    RoomSrv2.sendMessage($scope.messages, message);
     $scope.message = '';
   };
 });

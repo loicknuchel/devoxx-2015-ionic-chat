@@ -1,4 +1,4 @@
-angular.module('app', ['ionic'])
+angular.module('app', ['ionic', 'firebase'])
 
 .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
@@ -10,7 +10,7 @@ angular.module('app', ['ionic'])
     $urlRouterProvider.otherwise('/app');
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,4 +21,15 @@ angular.module('app', ['ionic'])
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.safeApply = function(fn){
+    var phase = this.$root ? this.$root.$$phase : this.$$phase;
+    if(phase === '$apply' || phase === '$digest'){
+      if(fn && (typeof(fn) === 'function')){
+        fn();
+      }
+    } else {
+      this.$apply(fn);
+    }
+  };
 })
