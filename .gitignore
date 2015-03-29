@@ -7,3 +7,5 @@ plugins/
 www/lib/
 resources/android/
 resources/ios/
+
+.brackets.json

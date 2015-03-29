@@ -1,10 +1,9 @@
 angular.module('app')
 
 // see https://www.firebase.com/docs/web/api/
-.factory('RoomSrv', function(){
+.factory('RoomSrv', function(Config){
   'user strict';
-  var firebaseUrl = 'https://chat-devoxx-2015.firebaseio.com/loicknuchel/default/';
-  var firebaseRef = new Firebase(firebaseUrl);
+  var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
     onMessage: onMessage,
@@ -30,10 +29,9 @@ angular.module('app')
 })
 
 // see https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray
-.factory('RoomSrv2', function($firebaseArray){
+.factory('RoomSrv2', function($firebaseArray, Config){
   'user strict';
-  var firebaseUrl = 'https://chat-devoxx-2015.firebaseio.com/loicknuchel/default/';
-  var firebaseRef = new Firebase(firebaseUrl);
+  var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
     getMessages: getMessages,

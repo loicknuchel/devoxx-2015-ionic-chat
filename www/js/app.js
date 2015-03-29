@@ -10,6 +10,10 @@ angular.module('app', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app');
 })
 
+.constant('Config', {
+  firebaseUrl: 'https://chat-devoxx-2015.firebaseio.com/loicknuchel/'
+})
+
 .run(function($ionicPlatform, $rootScope){
   $ionicPlatform.ready(function(){
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
