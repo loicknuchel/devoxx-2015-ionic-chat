@@ -114,3 +114,40 @@ Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le mê
 
 C'est quand même bien mieux comme ça : ![Screen step3-end](screenshots/step3-end.png)
 
+### Étape 4 : Ajouter et afficher les dates des messages
+
+Les personnes attentives auront remarqué qu'on n'enregistrait pas les dates des messages et qu'il y a donc un risque qu'ils soient mal ordonnés. Par ailleurs, il peut être sympa de voir quand les messages précédents ont été postés.
+
+L'objectif de cette étape sera donc d'ajouter et d'afficher les dates sur les messages ainsi que de trier les messages par ordre de dates (cf filtres angular).
+
+Pour formater des dates, il y a l'excellente librairie [momentjs](http://momentjs.com/) et un wrapper pour angular [angular-moment](https://github.com/urish/angular-moment).
+
+Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)
+
+Tant qu'on est sur les petites améliorations, tu as peut être remarqué que messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
+
+### Étape 5 : Et si on supprimait des messages ?
+
+Bonne idée ? Mauvaise idée ? En tous cas, on y va !!!
+
+Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'utilisateur fait un appui long dessus. Pour que ce ne soit pas innatendu par l'utilisateur, un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) pourrait être le bienvenu :)
+
+![Screen step5](screenshots/step5.png)
+
+### Étape 6 : Préparation du multi-room : le side-menu
+
+Parler tous ensemble c'est bien mais ce serait bien d'avoir des sujets précis et donc de gérer le multi-room. Dans le concept c'est très simple, au lieu de publier les messages dans `/myname/`, on va les publier dans `/myname/roomId/`. Cependant, cela va représenter pas mal de changements, notamment sur la partie interface. C'est pourquoi cette fonctionnalité est séparée en plusieurs étapes.
+
+Commençons par mettre en place un [side-menu](http://ionicframework.com/docs/api/directive/ionSideMenus/). Pour cela il va falloir créer un état abstrait et un [état imbriqué](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views) à notre application et renommer l'état courant pour garder un peu de cohérence.
+
+Résultat : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](screenshots/step6-2.png)
+
+### Étape 7 : Préparation du multi-room : afficher et ajouter des rooms dans le side-menu
+
+### Étape 8 : Finalisation du multi-room : changer de room
+
+### Étape 9 : Markdown support
+
+### Étape 10 : Custom app icon
+
+### Étape 11 : Add native plugins (Toast, Dialog)
