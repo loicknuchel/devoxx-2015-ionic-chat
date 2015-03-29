@@ -69,3 +69,8 @@ Commençons par la liste des messages. Tout d'abord, il va falloir prendre des d
 Tu as une super liste ? Bravo !
 
 Maintenant nous allons pouvoir créer le champ de text pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).
+
+Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il y a quelques petits problèmes UX... Si tu veux les régler, c'est bonus !
+
+- le message reste dans le champ de texte lorsqu'on l'envoi (il devrait disparaitre...)
+- si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé

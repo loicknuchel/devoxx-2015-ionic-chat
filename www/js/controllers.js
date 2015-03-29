@@ -21,5 +21,6 @@ angular.module('app')
       },
       content: $scope.message
     });
+    $scope.message = '';
   };
 });
