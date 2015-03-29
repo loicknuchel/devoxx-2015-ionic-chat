@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, RoomSrv){
+.controller('AppCtrl', function($scope, RoomSrv, UserSrv){
   'user strict';
   var onMessageRef = null;
   $scope.messages = [];
@@ -21,10 +21,7 @@ angular.module('app')
 
   $scope.sendMessage = function(){
     var message = {
-      user: {
-        avatar: 'http://ionicframework.com/img/docs/slimer.jpg',
-        name: 'Slimer'
-      },
+      user: UserSrv.get(),
       content: $scope.message
     };
     RoomSrv.sendMessage(message);
@@ -32,7 +29,7 @@ angular.module('app')
   };
 })
 
-.controller('AppCtrl2', function($scope, RoomSrv2){
+.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv){
   'user strict';
   $scope.messages = null;
 
@@ -45,10 +42,7 @@ angular.module('app')
 
   $scope.sendMessage = function(){
     var message = {
-      user: {
-        avatar: 'http://ionicframework.com/img/docs/slimer.jpg',
-        name: 'Slimer'
-      },
+      user: UserSrv.get(),
       content: $scope.message
     };
     RoomSrv2.sendMessage($scope.messages, message);

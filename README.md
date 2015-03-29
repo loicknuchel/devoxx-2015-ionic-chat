@@ -101,3 +101,9 @@ Il y a aussi une librairie spéciale pour angular, si tu veux l'utiliser (pas ob
 Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https://www.firebase.com/docs/) !
 
 Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
+
+### Étape 3 : personnaliser l'utilisateur
+
+Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
+
+Commençons par son nom. Nous allons créer un service pour gérer les données de l'utilisateur (et les persister en local) et lui permettre de changer son nom. Pour cela, je te propose d'utiliser une [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/).
