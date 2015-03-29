@@ -7,7 +7,7 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-avatar" ng-repeat="message in messages">
-        <img ng-src="{{message.user.avatar}}">
+        <img ng-src="https://sigil.cupcake.io/{{message.user.name || 'default'}}">
         <h2>{{message.user.name}}</h2>
         <p>{{message.content}}</p>
       </ion-item>
