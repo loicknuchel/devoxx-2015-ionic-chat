@@ -54,7 +54,7 @@ angular.module('app')
 })
 
 // see https://www.firebase.com/docs/web/api/
-.factory('RoomSrv', function(Config){
+.factory('RoomSrv', function(RoomUtils, Config){
   'user strict';
   var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
@@ -63,8 +63,8 @@ angular.module('app')
     offMessage: offMessage
   };
 
-  function sendMessage(message){
-    firebaseRef.push(message);
+  function sendMessage(user, message){
+    firebaseRef.push(RoomUtils.formatMessage(user, message));
   }
 
   function onMessage(fn){
@@ -82,7 +82,7 @@ angular.module('app')
 })
 
 // see https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray
-.factory('RoomSrv2', function($firebaseArray, Config){
+.factory('RoomSrv2', function($firebaseArray, RoomUtils, Config){
   'user strict';
   var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
@@ -91,8 +91,8 @@ angular.module('app')
     destroy: destroy
   };
 
-  function sendMessage(messages, message){
-    messages.$add(message);
+  function sendMessage(messages, user, message){
+    messages.$add(RoomUtils.formatMessage(user, message));
   }
 
   function getMessages(){
@@ -101,6 +101,22 @@ angular.module('app')
 
   function destroy(messages){
     messages.$destroy();
+  }
+
+  return service;
+})
+
+.factory('RoomUtils', function(){
+  'use strict';
+  var service = {
+    formatMessage: formatMessage
+  };
+
+  function formatMessage(user, message){
+    return {
+      user: user,
+      content: message
+    };
   }
 
   return service;

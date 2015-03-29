@@ -20,11 +20,7 @@ angular.module('app')
   });
 
   $scope.sendMessage = function(){
-    var message = {
-      user: UserSrv.get(),
-      content: $scope.message
-    };
-    RoomSrv.sendMessage(message);
+    RoomSrv.sendMessage(UserSrv.get(), $scope.message);
     $scope.message = '';
   };
 
@@ -51,11 +47,7 @@ angular.module('app')
   });
 
   $scope.sendMessage = function(){
-    var message = {
-      user: UserSrv.get(),
-      content: $scope.message
-    };
-    RoomSrv2.sendMessage($scope.messages, message);
+    RoomSrv2.sendMessage($scope.messages, UserSrv.get(), $scope.message);
     $scope.message = '';
   };
 
