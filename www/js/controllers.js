@@ -1,14 +1,22 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, RoomSrv, UserSrv, UserUI){
+.controller('AppCtrl', function($scope, RoomSrv, UserSrv, RoomUI, UserUI){
   'user strict';
   var onMessageRef = null;
   $scope.messages = [];
 
   $scope.$on('$ionicView.enter', function(){
-    onMessageRef = RoomSrv.onMessage(function(message){
+    onMessageRef = RoomSrv.onMessage(function(event, message){
       $scope.safeApply(function(){
-        $scope.messages.unshift(message);
+        if(event === 'child_added'){
+          $scope.messages.unshift(message);
+        } else if(event === 'child_removed'){
+          for(var i in $scope.messages){
+            if($scope.messages[i]._ref === message._ref){
+              $scope.messages.splice(i, 1);
+            }
+          }
+        }
       });
     });
   });
@@ -33,9 +41,17 @@ angular.module('app')
       }
     });
   };
+
+  $scope.messageActions = function(message){
+    RoomUI.messageActions(message).then(function(action){
+      if(action === 'delete'){
+        RoomSrv.deleteMessage(message);
+      }
+    });
+  };
 })
 
-.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv, UserUI){
+.controller('AppCtrl2', function($scope, RoomSrv2, UserSrv, RoomUI, UserUI){
   'user strict';
   $scope.messages = null;
 
@@ -57,6 +73,14 @@ angular.module('app')
       if(newName){
         user.name = newName;
         UserSrv.set(user);
+      }
+    });
+  };
+
+  $scope.messageActions = function(message){
+    RoomUI.messageActions(message).then(function(action){
+      if(action === 'delete'){
+        RoomSrv2.deleteMessage(message);
       }
     });
   };

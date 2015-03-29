@@ -6,7 +6,7 @@
   </ion-nav-bar>
   <ion-content>
     <ion-list class="chat">
-      <ion-item class="item-avatar" ng-repeat="message in messages | orderBy:'sendDate':true">
+      <ion-item class="item-avatar" ng-repeat="message in messages | orderBy:'sendDate':true" on-hold="messageActions(message)">
         <img ng-src="https://sigil.cupcake.io/{{message.user.name || 'default'}}">
         <small class="pull-right" am-time-ago="message.sendDate"></small>
         <h2>{{message.user.name}}</h2>

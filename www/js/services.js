@@ -59,6 +59,7 @@ angular.module('app')
   var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
+    deleteMessage: deleteMessage,
     onMessage: onMessage,
     offMessage: offMessage
   };
@@ -67,15 +68,26 @@ angular.module('app')
     firebaseRef.push(RoomUtils.formatMessage(user, message));
   }
 
+  function deleteMessage(message){
+    new Firebase(message._ref).remove();
+  }
+
   function onMessage(fn){
-    return firebaseRef.on('child_added', function(snapshot){
+    firebaseRef.on('child_added', function(snapshot){
       var data = snapshot.val();
-      fn(data);
+      data._ref = snapshot.ref().toString();
+      fn('child_added', data);
+    });
+    return firebaseRef.on('child_removed', function(snapshot){
+      var data = snapshot.val();
+      data._ref = snapshot.ref().toString();
+      fn('child_removed', data);
     });
   }
 
   function offMessage(ref){
     firebaseRef.off('child_added', ref);
+    firebaseRef.off('child_removed', ref);
   }
 
   return service;
@@ -87,12 +99,17 @@ angular.module('app')
   var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
+    deleteMessage: deleteMessage,
     getMessages: getMessages,
     destroy: destroy
   };
 
   function sendMessage(messages, user, message){
     messages.$add(RoomUtils.formatMessage(user, message));
+  }
+
+  function deleteMessage(messages, message){
+    messages.$remove(message);
   }
 
   function getMessages(){
@@ -118,6 +135,33 @@ angular.module('app')
       user: user,
       content: message
     };
+  }
+
+  return service;
+})
+
+.factory('RoomUI', function($q, $ionicActionSheet){
+  'use strict';
+  var service = {
+    messageActions: messageActions
+  };
+
+  function messageActions(message){
+    var defer = $q.defer();
+    var hideSheet = $ionicActionSheet.show({
+      titleText: 'Message de '+message.user.name+' :',
+      destructiveText: 'Supprimer',
+      destructiveButtonClicked: function(){
+        defer.resolve('delete');
+        hideSheet();
+      },
+      cancelText: 'Annuler',
+      cancel: function(){
+        defer.resolve('cancel');
+        hideSheet();
+      }
+    });
+    return defer.promise;
   }
 
   return service;

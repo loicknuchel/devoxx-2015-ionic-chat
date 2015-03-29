@@ -125,3 +125,9 @@ Pour formater des dates, il y a l'excellente librairie [momentjs](http://momentj
 Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)
 
 Tant qu'on est sur les petites améliorations, tu as peut être remarqué que messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
+
+### Étape 5 : Et si on supprimait des messages ?
+
+Bonne idée ? Mauvaise idée ? En tous cas, on y va !!!
+
+Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'utilisateur fait un appui long dessus. Pour que ce ne soit pas innatendu par l'utilisateur, un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) pourrait être le bienvenu :)
