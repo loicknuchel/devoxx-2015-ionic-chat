@@ -114,6 +114,7 @@ angular.module('app')
 
   function formatMessage(user, message){
     return {
+      sendDate: Date.now(),
       user: user,
       content: message
     };

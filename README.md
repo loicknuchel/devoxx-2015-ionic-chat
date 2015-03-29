@@ -114,3 +114,12 @@ Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le mê
 
 C'est quand même bien mieux comme ça : ![Screen step3-end](screenshots/step3-end.png)
 
+### Étape 4 : Ajouter et afficher les dates des messages
+
+Les personnes attentives auront remarqué qu'on n'enregistrait pas les dates des messages et qu'il y a donc un risque qu'ils soient mal ordonnés. Par ailleurs, il peut être sympa de voir quand les messages précédents ont été postés.
+
+L'objectif de cette étape sera donc d'ajouter et d'afficher les dates sur les messages ainsi que de trier les messages par ordre de dates (cf filtres angular).
+
+Pour formater des dates, il y a l'excellente librairie [momentjs](http://momentjs.com/) et un wrapper pour angular [angular-moment](https://github.com/urish/angular-moment).
+
+Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)

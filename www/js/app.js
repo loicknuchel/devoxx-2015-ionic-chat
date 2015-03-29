@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'firebase'])
+angular.module('app', ['ionic', 'firebase', 'angularMoment'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
