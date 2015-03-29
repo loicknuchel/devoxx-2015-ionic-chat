@@ -8,15 +8,8 @@ angular.module('app')
   $scope.$on('$ionicView.enter', function(){
     onMessageRef = RoomSrv.onMessage(function(event, message){
       $scope.safeApply(function(){
-        if(event === 'child_added'){
-          $scope.messages.unshift(message);
-        } else if(event === 'child_removed'){
-          for(var i in $scope.messages){
-            if($scope.messages[i]._ref === message._ref){
-              $scope.messages.splice(i, 1);
-            }
-          }
-        }
+             if(event === 'child_added')    { $scope.messages.unshift(message);                 }
+        else if(event === 'child_removed')  { _.remove($scope.messages, {_ref: message._ref});  }
       });
     });
   });

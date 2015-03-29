@@ -21,7 +21,6 @@ angular.module('app')
   return service;
 })
 
-
 .factory('UserUI', function($rootScope, $ionicPopup){
   'use strict';
   var service = {
