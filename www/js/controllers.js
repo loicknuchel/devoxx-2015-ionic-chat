@@ -1,7 +1,19 @@
 angular.module('app')
 
-.controller('AppCtrl', function(){
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, RoomBackend){
   'user strict';
+  RoomBackend.getRooms().then(function(rooms){
+    $scope.rooms = rooms;
+  });
+
+  // refresh rooms when you open side-menu
+  $scope.$watch(function(){ return $ionicSideMenuDelegate.isOpen(); }, function(opened){
+    if(opened){
+      RoomBackend.getRooms().then(function(rooms){
+        $scope.rooms = rooms;
+      });
+    }
+  });
 })
 
 .controller('RoomCtrl', function($scope, RoomSrv, UserSrv, RoomUI, UserUI){

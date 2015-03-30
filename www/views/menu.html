@@ -10,10 +10,12 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-positive">
-      <h1 class="title">Side menu</h1>
+      <h1 class="title">Rooms</h1>
     </ion-header-bar>
     <ion-content>
-      Side menu content
+      <ion-list>
+        <ion-item ng-repeat="room in rooms" nav-clear menu-close ui-sref="app.room({roomId: room.id})">#{{room.id}}</ion-item>
+      </ion-list>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

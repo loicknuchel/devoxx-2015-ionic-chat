@@ -122,6 +122,35 @@ angular.module('app')
   return service;
 })
 
+.factory('RoomBackend', function($http, Config){
+  'user strict';
+  var service = {
+    getRooms: getRooms
+  };
+
+  function getRooms(){
+    return $http.get(Config.firebaseUrl+'.json?shallow=true').then(function(res){
+      var rooms = [];
+
+      if(res && res.data){
+        for(var i in res.data){
+          if(res.data[i] && rooms.indexOf(i) === -1){
+            rooms.push({id: i});
+          }
+        }
+      }
+
+      if (rooms.length === 0) {
+        rooms.push({id: 'default'});
+      }
+
+      return rooms;
+    });
+  }
+
+  return service;
+})
+
 .factory('RoomUtils', function(){
   'use strict';
   var service = {

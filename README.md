@@ -144,6 +144,8 @@ Résultat : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](scre
 
 ### Étape 7 : Préparation du multi-room : afficher et ajouter des rooms dans le side-menu
 
+Tout d'abord, il faut récupérer la liste des rooms pour l'afficher dans le side-menu. Pour ce faire, tu peux regarder du côté de l'[API REST](https://www.firebase.com/docs/rest/api/#section-query-parameters) de firebase.
+
 ### Étape 8 : Finalisation du multi-room : changer de room
 
 ### Étape 9 : Markdown support
