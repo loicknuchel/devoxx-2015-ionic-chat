@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, RoomBackend){
+.controller('AppCtrl', function($scope, $state, $ionicSideMenuDelegate, $ionicHistory, RoomBackend, RoomUI){
   'user strict';
   RoomBackend.getRooms().then(function(rooms){
     $scope.rooms = rooms;
@@ -10,19 +10,40 @@ angular.module('app')
   $scope.$watch(function(){ return $ionicSideMenuDelegate.isOpen(); }, function(opened){
     if(opened){
       RoomBackend.getRooms().then(function(rooms){
-        $scope.rooms = rooms;
+        for(var i in rooms){
+          if(!_.find($scope.rooms, {id: rooms[i].id})){
+            $scope.rooms.unshift(rooms[i]);
+          }
+        }
       });
     }
   });
+
+  $scope.createRoom = function(){
+    RoomUI.createRoom().then(function(roomId){
+      if(roomId){
+        if(!_.find($scope.rooms, {id: roomId})){
+          $scope.rooms.unshift({id: roomId});
+        }
+        $state.go('app.room', {roomId: roomId});
+        $ionicSideMenuDelegate.toggleLeft(false);
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
+      }
+    });
+  };
 })
 
-.controller('RoomCtrl', function($scope, RoomSrv, UserSrv, RoomUI, UserUI){
+.controller('RoomCtrl', function($scope, $stateParams, RoomSrv, UserSrv, RoomUI, UserUI){
   'user strict';
-  var onMessageRef = null;
+  var roomId = $stateParams.roomId;
+  $scope.room = roomId;
   $scope.messages = [];
 
   $scope.$on('$ionicView.enter', function(){
-    onMessageRef = RoomSrv.onMessage(function(event, message){
+    RoomSrv.onMessage(roomId, function(event, message){
       $scope.safeApply(function(){
              if(event === 'child_added')    { $scope.messages.unshift(message);                 }
         else if(event === 'child_removed')  { _.remove($scope.messages, {_ref: message._ref});  }
@@ -30,14 +51,12 @@ angular.module('app')
     });
   });
   $scope.$on('$ionicView.leave', function(){
-    if(onMessageRef !== null){
-      RoomSrv.offMessage(onMessageRef);
-      onMessageRef = null;
-    }
+    RoomSrv.offMessage(roomId);
+    $scope.messages = [];
   });
 
   $scope.sendMessage = function(){
-    RoomSrv.sendMessage(UserSrv.get(), $scope.message);
+    RoomSrv.sendMessage(roomId, UserSrv.get(), $scope.message);
     $scope.message = '';
   };
 
@@ -60,12 +79,14 @@ angular.module('app')
   };
 })
 
-.controller('RoomCtrl2', function($scope, RoomSrv2, UserSrv, RoomUI, UserUI){
+.controller('RoomCtrl2', function($scope, $stateParams, RoomSrv2, UserSrv, RoomUI, UserUI){
   'user strict';
+  var roomId = $stateParams.roomId;
+  $scope.room = roomId;
   $scope.messages = null;
 
   $scope.$on('$ionicView.enter', function(){
-    $scope.messages = RoomSrv2.getMessages();
+    $scope.messages = RoomSrv2.getMessages(roomId);
   });
   $scope.$on('$ionicView.leave', function(){
     RoomSrv2.destroy($scope.messages);

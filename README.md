@@ -146,10 +146,14 @@ Résultat : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](scre
 
 Tout d'abord, il faut récupérer la liste des rooms pour l'afficher dans le side-menu. Pour ce faire, tu peux regarder du côté de l'[API REST](https://www.firebase.com/docs/rest/api/#section-query-parameters) de firebase.
 
-### Étape 8 : Finalisation du multi-room : changer de room
+![Screen step7-1](screenshots/step7-1.png)
 
-### Étape 9 : Markdown support
+On va maintenant vouloir créer une room et afficher son contenu dans l'écran principal. Pour cela, on peut utiliser une popup dans le side-menu pour créer la nouvelle room et il faudra paramétrer notre état room pour qu'il affiche différents contenus.
 
-### Étape 10 : Custom app icon
+![Screen step7-2](screenshots/step7-2.png) et ![Screen step7-4](screenshots/step7-4.png)
 
-### Étape 11 : Add native plugins (Toast, Dialog)
+### Étape 8 : Markdown support
+
+### Étape 9 : Custom app icon
+
+### Étape 10 : Add native plugins (Toast, Dialog)

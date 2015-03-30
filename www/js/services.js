@@ -55,7 +55,6 @@ angular.module('app')
 // see https://www.firebase.com/docs/web/api/
 .factory('RoomSrv', function(RoomUtils, Config){
   'user strict';
-  var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
     deleteMessage: deleteMessage,
@@ -63,30 +62,40 @@ angular.module('app')
     offMessage: offMessage
   };
 
-  function sendMessage(user, message){
-    firebaseRef.push(RoomUtils.formatMessage(user, message));
+  function sendMessage(roomId, user, message){
+    _getRef(roomId).push(RoomUtils.formatMessage(user, message));
   }
 
   function deleteMessage(message){
     new Firebase(message._ref).remove();
   }
 
-  function onMessage(fn){
+  function onMessage(roomId, fn){
+    var firebaseRef = _getRef(roomId);
     firebaseRef.on('child_added', function(snapshot){
       var data = snapshot.val();
       data._ref = snapshot.ref().toString();
       fn('child_added', data);
     });
-    return firebaseRef.on('child_removed', function(snapshot){
+    firebaseRef.on('child_removed', function(snapshot){
       var data = snapshot.val();
       data._ref = snapshot.ref().toString();
       fn('child_removed', data);
     });
   }
 
-  function offMessage(ref){
-    firebaseRef.off('child_added', ref);
-    firebaseRef.off('child_removed', ref);
+  function offMessage(roomId){
+    var firebaseRef = _getRef(roomId);
+    firebaseRef.off('child_added');
+    firebaseRef.off('child_removed');
+  }
+
+  var roomRefs = {};
+  function _getRef(roomId){
+    if(!roomRefs[roomId]){
+      roomRefs[roomId] = new Firebase(Config.firebaseUrl+roomId+'/');
+    }
+    return roomRefs[roomId];
   }
 
   return service;
@@ -95,7 +104,6 @@ angular.module('app')
 // see https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray
 .factory('RoomSrv2', function($firebaseArray, RoomUtils, Config){
   'user strict';
-  var firebaseRef = new Firebase(Config.firebaseUrl+'default/');
   var service = {
     sendMessage: sendMessage,
     deleteMessage: deleteMessage,
@@ -111,12 +119,16 @@ angular.module('app')
     messages.$remove(message);
   }
 
-  function getMessages(){
-    return $firebaseArray(firebaseRef);
+  function getMessages(roomId){
+    return $firebaseArray(_getRef(roomId));
   }
 
   function destroy(messages){
     messages.$destroy();
+  }
+
+  function _getRef(roomId){
+    return new Firebase(Config.firebaseUrl+roomId+'/');
   }
 
   return service;
@@ -168,10 +180,11 @@ angular.module('app')
   return service;
 })
 
-.factory('RoomUI', function($q, $ionicActionSheet){
+.factory('RoomUI', function($rootScope, $q, $ionicActionSheet, $ionicPopup){
   'use strict';
   var service = {
-    messageActions: messageActions
+    messageActions: messageActions,
+    createRoom: createRoom
   };
 
   function messageActions(message){
@@ -190,6 +203,28 @@ angular.module('app')
       }
     });
     return defer.promise;
+  }
+
+  function createRoom(){
+    var popupScope = $rootScope.$new(true);
+    popupScope.data = {
+      roomId: ''
+    };
+    return $ionicPopup.show({
+      template: '<input type="text" ng-model="data.roomId" autofocus>',
+      title: 'Nom de la room :',
+      scope: popupScope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: 'Rejoindre',
+          type: 'button-positive',
+          onTap: function(e){
+            return popupScope.data.roomId;
+          }
+        }
+      ]
+    });
   }
 
   return service;

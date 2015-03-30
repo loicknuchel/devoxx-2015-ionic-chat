@@ -9,7 +9,7 @@ angular.module('app', ['ionic', 'firebase', 'angularMoment'])
     controller: 'AppCtrl'
   })
   .state('app.room', {
-    url: '/room',
+    url: '/room/:roomId',
     views: {
       'menuContent': {
         templateUrl: 'views/room.html',
@@ -17,7 +17,7 @@ angular.module('app', ['ionic', 'firebase', 'angularMoment'])
       }
     }
   });
-  $urlRouterProvider.otherwise('/app/room');
+  $urlRouterProvider.otherwise('/app/room/default');
 })
 
 .constant('Config', {
