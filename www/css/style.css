@@ -11,3 +11,18 @@
 .chat .item p {
   white-space: normal;
 }
+
+/* markdown styles */
+.chat .item p h1,
+.chat .item p h2,
+.chat .item p h3,
+.chat .item p h4,
+.chat .item p h5 {
+  white-space: normal;
+}
+.chat .item p em {
+  font-weight: bold;
+}
+.chat .item p strong {
+  color: #eb685b;
+}

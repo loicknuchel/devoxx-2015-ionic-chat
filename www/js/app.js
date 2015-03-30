@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'firebase', 'angularMoment'])
+angular.module('app', ['ionic', 'firebase', 'angularMoment', 'btford.markdown'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider

@@ -154,6 +154,14 @@ On va maintenant vouloir créer une room et afficher son contenu dans l'écran p
 
 ### Étape 8 : Markdown support
 
+L'application commence à être sympa non ? Et si on y ajoutait des styles ? Genre du markdown ?
+
+Ce qui est cool c'est qu'il y a déjà une lib Angular : [angular-markdown-directive](https://github.com/btford/angular-markdown-directive) :)
+
+Et voilà : ![Screen step8](screenshots/step8.png)
+
+C'était simple non ?
+
 ### Étape 9 : Custom app icon
 
 ### Étape 10 : Add native plugins (Toast, Dialog)

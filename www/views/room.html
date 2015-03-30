@@ -8,7 +8,7 @@
         <img ng-src="https://sigil.cupcake.io/{{message.user.name || 'default'}}">
         <small class="pull-right" am-time-ago="message.sendDate"></small>
         <h2>{{message.user.name}}</h2>
-        <p>{{message.content}}</p>
+        <p btf-markdown="message.content"></p>
       </ion-item>
     </ion-list>
   </ion-content>
