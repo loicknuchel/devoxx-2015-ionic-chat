@@ -102,6 +102,8 @@ Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https
 
 Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
 
+PS: stocker vos messages dans une sous-arborescence, `/default` par exemple (anticipation de la suite).
+
 ### Étape 3 : personnaliser l'utilisateur
 
 Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
@@ -169,3 +171,24 @@ Sympa l'application non ? Faisons une petite pause dans les fonctionnalités pou
 Pour ceux qui sont sous Android, ne vous inquiétez pas si le logo ne change pas... Android gère mal de changement de logo d'une application. Pour voir votre nouvelle icône, il suffit de désinstaller l'application et de la réinstaller.
 
 ### Étape 10 : Add native plugins (Toast, Dialog)
+
+On a bien taffé mais au final, on ne fait pas grand chose de plus qu'un site web... Bon ok, on va maintenant ajouter quelques plugins pour rendre les choses plus sympa. Pour note, l'équipe de Ionic a lancé un projet bien sympa [ngCordova](http://ngcordova.com/) mais pour cette fois-ci, on va y aller à l'ancienne ;)
+
+Voici les plugins qui peuvent être intéressants pour notre application :
+
+- [actionSheet](https://github.com/EddyVerbruggen/cordova-plugin-actionsheet) : remplace l'actionSheet de Ionic par une native ([ngCordova](http://ngcordova.com/docs/plugins/actionSheet/))
+- [camera](https://github.com/apache/cordova-plugin-camera) : pour publier des photos / changer son avatar ([ngCordova](http://ngcordova.com/docs/plugins/camera/))
+- [geolocation](https://github.com/apache/cordova-plugin-geolocation) : pour envoyer des messages géolocalisés ([ngCordova](http://ngcordova.com/docs/plugins/geolocation/))
+- [inAppBrowser](https://github.com/apache/cordova-plugin-inappbrowser) : pour ouvrir des liens ([ngCordova](http://ngcordova.com/docs/plugins/inAppBrowser/))
+- [oauth](http://ngcordova.com/docs/plugins/oauth/) : pour que les utilisateurs s'enregistrent avec leur réseau social ([ngCordova](http://ngcordova.com/docs/plugins/oauth/))
+- [socialSharing](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin) : pour partager du contenu ([ngCordova](http://ngcordova.com/docs/plugins/socialSharing/))
+- [sqlite](https://github.com/brodysoft/Cordova-SQLitePlugin) : pour utiliser une base de données embarquée (aller + loin que le localStorage) ([ngCordova](http://ngcordova.com/docs/plugins/sqlite/))
+- [toast](https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin) : pour afficher de petits messages d'information non intrusifs ([ngCordova](http://ngcordova.com/docs/plugins/toast/))
+
+Pour commencer, le plus simple est de mettre en place le plugin `toast`. L'idéal est de créer un service spécial pour utiliser ce plugin de manière simple dans le reste du code.
+
+![Screen step10](screenshots/step10.png)
+
+### Fini !!!
+
+Tu es arrivé jusque là ? Félicitations !!! Tu peux maintenant trouver toi-même des fonctionnalités/plugins à mettre en place, aider les autres à avancer ou tout simplement tester ta nouvelle application :D

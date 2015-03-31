@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, $state, $ionicSideMenuDelegate, $ionicHistory, RoomBackend, RoomUI){
+.controller('AppCtrl', function($scope, $state, $ionicSideMenuDelegate, $ionicHistory, RoomBackend, RoomUI, ToastPlugin){
   'user strict';
   RoomBackend.getRooms().then(function(rooms){
     $scope.rooms = rooms;
@@ -25,6 +25,7 @@ angular.module('app')
         if(!_.find($scope.rooms, {id: roomId})){
           $scope.rooms.unshift({id: roomId});
         }
+        ToastPlugin.show('Création de la room '+roomId);
         $state.go('app.room', {roomId: roomId});
         $ionicSideMenuDelegate.toggleLeft(false);
         $ionicHistory.nextViewOptions({
@@ -36,7 +37,7 @@ angular.module('app')
   };
 })
 
-.controller('RoomCtrl', function($scope, $stateParams, RoomSrv, UserSrv, RoomUI, UserUI){
+.controller('RoomCtrl', function($scope, $stateParams, RoomSrv, UserSrv, RoomUI, UserUI, ToastPlugin){
   'user strict';
   var roomId = $stateParams.roomId;
   $scope.room = roomId;
@@ -57,6 +58,7 @@ angular.module('app')
 
   $scope.sendMessage = function(){
     RoomSrv.sendMessage(roomId, UserSrv.get(), $scope.message);
+    ToastPlugin.show('✓ Message envoyé');
     $scope.message = '';
   };
 
@@ -79,7 +81,7 @@ angular.module('app')
   };
 })
 
-.controller('RoomCtrl2', function($scope, $stateParams, RoomSrv2, UserSrv, RoomUI, UserUI){
+.controller('RoomCtrl2', function($scope, $stateParams, RoomSrv2, UserSrv, RoomUI, UserUI, ToastPlugin){
   'user strict';
   var roomId = $stateParams.roomId;
   $scope.room = roomId;
@@ -94,6 +96,7 @@ angular.module('app')
 
   $scope.sendMessage = function(){
     RoomSrv2.sendMessage($scope.messages, UserSrv.get(), $scope.message);
+    ToastPlugin.show('✓ Message envoyé');
     $scope.message = '';
   };
 

@@ -259,4 +259,41 @@ angular.module('app')
   }
 
   return service;
+})
+
+// for plugin Toast : https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
+.factory('ToastPlugin', function($q, $window, $log, $ionicPlatform){
+  'use strict';
+  var pluginName = 'Toast';
+  var pluginTest = function(){ return $window.plugins && $window.plugins.toast; };
+  var service = {
+    show: show,
+    showShortTop    : function(message, successCb, errorCb){ show(message, 'short', 'top', successCb, errorCb);     },
+    showShortCenter : function(message, successCb, errorCb){ show(message, 'short', 'center', successCb, errorCb);  },
+    showShortBottom : function(message, successCb, errorCb){ show(message, 'short', 'bottom', successCb, errorCb);  },
+    showLongTop     : function(message, successCb, errorCb){ show(message, 'long', 'top', successCb, errorCb);      },
+    showLongCenter  : function(message, successCb, errorCb){ show(message, 'long', 'center', successCb, errorCb);   },
+    showLongBottom  : function(message, successCb, errorCb){ show(message, 'long', 'bottom', successCb, errorCb);   }
+  };
+
+  function show(message, duration, position, successCb, errorCb){
+    if(!duration)   { duration  = 'short';            } // possible values : 'short', 'long'
+    if(!position)   { position  = 'bottom';           } // possible values : 'top', 'center', 'bottom'
+    if(!successCb)  { successCb = function(status){}; }
+    if(!errorCb)    { errorCb   = function(error){};  }
+    return _onReady(pluginName, pluginTest).then(function(){
+      $window.plugins.toast.show(message, duration, position, successCb, errorCb);
+    });
+  }
+
+  function _onReady(name, testFn){
+    return $ionicPlatform.ready().then(function(){
+      if(!testFn()){
+        $log.error('pluginNotFound:'+name);
+        return $q.reject({message: 'pluginNotFound:'+name});
+      }
+    });
+  }
+
+  return service;
 });
