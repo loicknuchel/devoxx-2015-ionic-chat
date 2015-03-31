@@ -102,6 +102,8 @@ Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https
 
 Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
 
+PS: stocker vos messages dans une sous-arborescence, `/default` par exemple (anticipation de la suite).
+
 ### Étape 3 : personnaliser l'utilisateur
 
 Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
@@ -144,10 +146,49 @@ Résultat : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](scre
 
 ### Étape 7 : Préparation du multi-room : afficher et ajouter des rooms dans le side-menu
 
-### Étape 8 : Finalisation du multi-room : changer de room
+Tout d'abord, il faut récupérer la liste des rooms pour l'afficher dans le side-menu. Pour ce faire, tu peux regarder du côté de l'[API REST](https://www.firebase.com/docs/rest/api/#section-query-parameters) de firebase.
 
-### Étape 9 : Markdown support
+![Screen step7-1](screenshots/step7-1.png)
 
-### Étape 10 : Custom app icon
+On va maintenant vouloir créer une room et afficher son contenu dans l'écran principal. Pour cela, on peut utiliser une popup dans le side-menu pour créer la nouvelle room et il faudra paramétrer notre état room pour qu'il affiche différents contenus.
 
-### Étape 11 : Add native plugins (Toast, Dialog)
+![Screen step7-2](screenshots/step7-2.png) et ![Screen step7-4](screenshots/step7-4.png)
+
+### Étape 8 : Markdown support
+
+L'application commence à être sympa non ? Et si on y ajoutait des styles ? Genre du markdown ?
+
+Ce qui est cool c'est qu'il y a déjà une lib Angular : [angular-markdown-directive](https://github.com/btford/angular-markdown-directive) :)
+
+Et voilà : ![Screen step8](screenshots/step8.png)
+
+C'était simple non ?
+
+### Étape 9 : Custom app icon
+
+Sympa l'application non ? Faisons une petite pause dans les fonctionnalités pour s'occuper de ce qu'il y a "autour". Et notamment de l'icône et de l'image de lancement (splash screen). Ca tombe bien, Ionic nous [facilite grandement la tâche](http://ionicframework.com/docs/cli/icon-splashscreen.html) avec la CLI. Voici [un](https://www.google.fr/search?q=chat+icon&tbm=isch) [peu](https://www.google.fr/search?q=chat+bubble+icon&tbm=isch) [d'](https://www.google.fr/search?q=discussion&tbm=isch)[inspiration](https://www.google.fr/search?q=forum&tbm=isch).
+
+Pour ceux qui sont sous Android, ne vous inquiétez pas si le logo ne change pas... Android gère mal de changement de logo d'une application. Pour voir votre nouvelle icône, il suffit de désinstaller l'application et de la réinstaller.
+
+### Étape 10 : Add native plugins (Toast, Dialog)
+
+On a bien taffé mais au final, on ne fait pas grand chose de plus qu'un site web... Bon ok, on va maintenant ajouter quelques plugins pour rendre les choses plus sympa. Pour note, l'équipe de Ionic a lancé un projet bien sympa [ngCordova](http://ngcordova.com/) mais pour cette fois-ci, on va y aller à l'ancienne ;)
+
+Voici les plugins qui peuvent être intéressants pour notre application :
+
+- [actionSheet](https://github.com/EddyVerbruggen/cordova-plugin-actionsheet) : remplace l'actionSheet de Ionic par une native ([ngCordova](http://ngcordova.com/docs/plugins/actionSheet/))
+- [camera](https://github.com/apache/cordova-plugin-camera) : pour publier des photos / changer son avatar ([ngCordova](http://ngcordova.com/docs/plugins/camera/))
+- [geolocation](https://github.com/apache/cordova-plugin-geolocation) : pour envoyer des messages géolocalisés ([ngCordova](http://ngcordova.com/docs/plugins/geolocation/))
+- [inAppBrowser](https://github.com/apache/cordova-plugin-inappbrowser) : pour ouvrir des liens ([ngCordova](http://ngcordova.com/docs/plugins/inAppBrowser/))
+- [oauth](http://ngcordova.com/docs/plugins/oauth/) : pour que les utilisateurs s'enregistrent avec leur réseau social ([ngCordova](http://ngcordova.com/docs/plugins/oauth/))
+- [socialSharing](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin) : pour partager du contenu ([ngCordova](http://ngcordova.com/docs/plugins/socialSharing/))
+- [sqlite](https://github.com/brodysoft/Cordova-SQLitePlugin) : pour utiliser une base de données embarquée (aller + loin que le localStorage) ([ngCordova](http://ngcordova.com/docs/plugins/sqlite/))
+- [toast](https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin) : pour afficher de petits messages d'information non intrusifs ([ngCordova](http://ngcordova.com/docs/plugins/toast/))
+
+Pour commencer, le plus simple est de mettre en place le plugin `toast`. L'idéal est de créer un service spécial pour utiliser ce plugin de manière simple dans le reste du code.
+
+![Screen step10](screenshots/step10.png)
+
+### Fini !!!
+
+Tu es arrivé jusque là ? Félicitations !!! Tu peux maintenant trouver toi-même des fonctionnalités/plugins à mettre en place, aider les autres à avancer ou tout simplement tester ta nouvelle application :D
