@@ -58,11 +58,22 @@ Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réell
 
 Voici le résultat que tu devrais obtenir : ![Screen setp0](screenshots/step0.png)
 
-### Étape 1 : création de l'interface
+### Étape 1 : Création de l'interface minimale
 
-Il y a deux éléments principaux dans une application de chat, la liste des messages et le champ de texte pour envoyer un nouveau message.
+**Objectif**
 
-Commençons par la liste des messages. Tout d'abord, il va falloir prendre des données pour voir à quoi ressemblera cette liste. Voici quelques messages de test :
+Implémenter les éléments graphiques :
+
+* la liste des messages avec l'avater et le nom du créateur
+* le champ de texte pour envoyer un nouveau message
+
+**Ressources**
+
+*Pour les messages*, ionic fournit des composants CSS permettant d'afficher des
+listes avec des avatars : [Iteam Avatars](http://ionicframework.com/docs/components/#item-avatars)
+
+Voici un jeu de messages test à ajouter dans le contrôleur:
+
 ```javascript
 [
     {user: {avatar: 'http://ionicframework.com/img/docs/venkman.jpg', name: 'Venkman'}, content: 'Back off, man. I\'m a scientist.'},
@@ -75,14 +86,12 @@ Commençons par la liste des messages. Tout d'abord, il va falloir prendre des d
 ]
 ```
 
-Tu as une super liste ? Bravo !
+*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers
+types de footer : [Footer](http://ionicframework.com/docs/components/#footer) et
+[Bar input](http://ionicframework.com/docs/components/#bar-inputs).
 
-Maintenant nous allons pouvoir créer le champ de text pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).
-
-Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il y a quelques petits problèmes UX... Si tu veux les régler, c'est bonus !
-
-- le message reste dans le champ de texte lorsqu'on l'envoi (il devrait disparaitre...)
-- si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé
+Pour l'ajouter automatiquement à la liste des messages, il faut implémenter une
+fonction ``sendMessage(message)`` dans le contrôleur.
 
 Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
 
