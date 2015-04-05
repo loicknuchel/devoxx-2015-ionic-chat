@@ -1,36 +1,45 @@
 # Faire un chat avec Ionic & Firebase
 ##### Par [Loïc Delmaire](https://twitter.com/loicdelmaire) & [Loïc Knuchel](http://loic.knuchel.org/)
 
-**Prérequis** : Les participants doivent connaitre un minimum de JavaScript et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions
+**Prérequis** : Les participants doivent connaitre un minimum de JavaScript
+et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions
 
 ### L'application à développer
 
-L'objectif de ce [Hands on Lab](http://cfp.devoxx.fr/2015/talk/JDN-0259/3h_pour_creer_votre_application_mobile_de_chat) est de faire coder aux participants une application mobile de chat en utilisant Ionic Framework (Cordova et Angular) et Firebase comme backend.
+L'objectif de ce [Hands on Lab](http://cfp.devoxx.fr/2015/talk/JDN-0259/3h_pour_creer_votre_application_mobile_de_chat)
+est de faire coder aux participants une application mobile de chat en utilisant [Ionic Framework](http://ionicframework.com/)
+(Cordova et Angular) et [Firebase](https://www.firebase.com/) comme backend.
 
-Les premières étapes sont la mise en place d'un MVP fonctionnel puis l'enrichissement progressif de celui-ci avec différentes fonctionnalités :
+Les premières étapes sont la mise en place d'un MVP fonctionnel puis l'enrichissement progressif
+de celui-ci avec différentes fonctionnalités :
 
-- changement de pseudo
-- multi-room
-- support des avatar
-- support du markdown
-- changer l'icone de l'application
+* Changement de pseudo
+* Multi-channels
+* Support des avatars
+* Support du markdown
+* Changement del'icone de l'application
 
 ### Informations
 
 Ressources utiles :
 
-- [Ionic Framework docs](http://ionicframework.com/docs/)
-- [Angular API](https://docs.angularjs.org/api)
+* [Ionic Framework docs](http://ionicframework.com/docs/)
+* [Angular API](https://docs.angularjs.org/api)
 
 ### Installation
 
-Les participants doivent avoir installé leur environnement au préalable et exécuté le template de base de ce repo (branche master). Pour cela, le mieux est de suivre le [Getting Started](http://ionicframework.com/getting-started/) de Ionic framework puis cloner ce repo et lancer les commandes suivantes :
+Les participants doivent avoir installé leur environnement au préalable et exécuté le
+template de base de ce repo (branche master).
+
+Pour cela, le mieux est de suivre le [Getting Started](http://ionicframework.com/getting-started/)
+de Ionic framework puis cloner ce repo (`git clone
+https://github.com/loicknuchel/devoxx-2015-ionic-chat.git`) et lancer les commandes suivantes :
 
 ```
-npm install
-bower install
-cordova platform add [android/ios]
-ionic run
+npm install # Installation des dépendances liées à nodejs
+bower install # Installation des dépendances liées au front
+cordova platform add <android|ios> # Ajout des sources pour compiler sur
+ionic run <android|ios> # Lancement de l'application sur un device connecté à l'ordinateur
 ```
 
 ### Étape 0 : mise en place de la structure de l'application
