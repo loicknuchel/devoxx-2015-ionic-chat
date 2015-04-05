@@ -95,6 +95,8 @@ fonction ``sendMessage(message)`` dans le contrôleur.
 
 Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
 
+[Lien vers la correction](https://gist.github.com/skelz0r/52004bdc808c411086f1)
+
 ### Étape 2 : le backend
 
 Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous
@@ -143,17 +145,45 @@ On utilisera des [FirebaseArray](https://www.firebase.com/docs/web/libraries/ang
 L'URL devra être namespacé avec votre nom et le 'default' :
 `https://chat-devoxx-2015.firebaseio.com/name/default/`
 
-### Étape 3 : personnaliser l'utilisateur
+Ajouter une constante `Config` dans `app.js` dans laquelle vous stockerez l'URL
+ci-dessus.
 
-Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
+Et enfin, remplacer les méthodes du contrôleur par celles du RoomSrv.
 
-Commençons par son nom. Nous allons créer un service pour gérer les données de l'utilisateur (et les persister en local) et lui permettre de changer son nom. Pour cela, je te propose d'ajouter un bouton dans la barre de header et d'utiliser une [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/).
+[Lien vers la correction](https://gist.github.com/skelz0r/2cdbfccc02445948987e)
 
-Voici à quoi ça devrais ressembler : ![Screen step3-1](screenshots/step3-1.png) et ![Screen step3-2](screenshots/step3-2.png)
+### Étape 3 : Personnaliser l'utilisateur
 
-Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le même avatar. Comme prendre une photo, la redimentionner, l'uploader sur un serveur et l'afficher en tant qu'avatar utilisateur est un peu complexe, je te propose d'utiliser des [identicon](https://github.com/cupcake/sigil).
+Le chat est fonctionnel, mais il est impossible de savoir qui a posté quoi :(
 
-C'est quand même bien mieux comme ça : ![Screen step3-end](screenshots/step3-end.png)
+Il est temps de changer ça en permettant de changer son nom et son avatar.
+
+**Objectif**
+
+On va permettre de personnaliser l'utilisateur en:
+
+* ajoutant de quoi modifier le nom ;
+* générer un avatar en fonction de son nom.
+
+Pour cela, il faut implémenter un service `User` qui aura deux méthodes:
+
+* `get()` qui retournera l'utilisateur ;
+* `changeName()` qui fera apparaître une popup ionic, et qui permettra de
+  changer le nom de l'utilisateur
+
+Les changements seront stocké en local à l'aide de `window.localStorage`, vous
+trouverez une implémentation d'un service ici :
+[Storage](https://gist.github.com/skelz0r/7110873b8173dc354303)
+
+Pour l'avatar, on utilisarea [identicon](https://github.com/cupcake/sigil)
+
+**Ressources**
+
+* [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/)
+* [Exemple d'avatar avec le nom 'ionic'](https://sigil.cupcake.io/ionic)
+
+Voici à quoi cela devrait ressembler
+![Screen step3-end](screenshots/step3-end.png)
 
 ### Étape 4 : Ajouter et afficher les dates des messages
 
