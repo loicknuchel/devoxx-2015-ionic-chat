@@ -97,30 +97,51 @@ Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Scr
 
 ### Étape 2 : le backend
 
-Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone, pas encore moyen de communiquer... Réglons ce problème et attaquons nous maintenant au backend.
+Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous
+verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone,
+pas encore moyen de communiquer...
 
-Dans le cadre de cet atelier, nous allons utiliser [firebase](https://www.firebase.com/) comme base de données, mais [parse](https://parse.com/)+[pusher](https://pusher.com/) ou un backend custom ferait tout aussi bien l'affaire !
+Réglons ce problème et attaquons nous maintenant au backend.
 
-Firebase est un Backend as a Service, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur et ce concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
+Dans le cadre de cet atelier, nous allons utiliser [Firebase](https://www.firebase.com/) comme base de données
+(à noter que [Parse](https://parse.com/)+[Pusher](https://pusher.com/) ou un backend
+custom ferait tout aussi bien l'affaire !).
 
-Tout d'abord, il faut créer une application sur firebase. Tu peux soit créer ta propre application (5 min) soit utiliser l'application que j'ai créé pour l'atelier (https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
+Firebase est un *Backend as a Service*, c'est une sorte de base de donnée hébergée et accessible via une API.
+Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur
+et se concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
 
-Ensuite, il faut installer la librairie firebase :
+Tout d'abord, il faut créer une application sur Firebase.
+Au choix, tu peux soit créer ta propre application (5 min) soit utiliser l'application que
+j'ai créé pour l'atelier : https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de
+l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres
+(ex: https://chat-devoxx-2015.firebaseio.com/myname/).
 
-- télécharger la librairie : `bower install firebase --save` (merci bower !)
-- l'inclure de la index.html : `<script src="lib/firebase/firebase.js"></script>`
+**Installation**
 
-Il y a aussi une librairie spéciale pour angular, si tu veux l'utiliser (pas obligé) il faut aussi :
+Nous allons utiliser la librairie spéciale pour angular de Firebase:
 
-- la télécharger : `bower install angularfire --save`
-- l'inclure dans le index.html `<script src="lib/angularfire/dist/angularfire.js"></script>`
-- et enfin, l'ajouter un dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])`
+1. Télécharger les librairies (firebase et angularfire) : `bower install firebase angularfire --save` (merci bower !)
+2. Les inclure dans le *index.html* :
+   ```
+   <script src="lib/firebase/firebase.js"></script>
+   <script src="lib/angularfire/dist/angularfire.js"></script>
+   ```
+3. Ajouter 'firebase' en dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])`
 
-Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https://www.firebase.com/docs/) !
+**Objectif**
 
-Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
+Implémenter un service `RoomSrv` qui aura deux méthodes:
 
-PS: stocker vos messages dans une sous-arborescence, `/default` par exemple (anticipation de la suite).
+* `getMessage()` qui retournera la liste des messages ;
+* `sendMessage(message, messages)` avec `message` le nouveau message et
+  `messages` la liste des messages
+
+Ce service s'interfaçera bien entendue avec Firebase.
+On utilisera des [FirebaseArray](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray)
+
+L'URL devra être namespacé avec votre nom et le 'default' :
+`https://chat-devoxx-2015.firebaseio.com/name/default/`
 
 ### Étape 3 : personnaliser l'utilisateur
 
