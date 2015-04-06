@@ -68,14 +68,14 @@ Commençons par la liste des messages. Tout d'abord, il va falloir prendre des d
 
 Tu as une super liste ? Bravo !
 
-Maintenant nous allons pouvoir créer le champ de text pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).
+Maintenant nous allons pouvoir créer le champ de texte pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).
 
 Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il y a quelques petits problèmes UX... Si tu veux les régler, c'est bonus !
 
-- le message reste dans le champ de texte lorsqu'on l'envoi (il devrait disparaitre...)
+- le message reste dans le champ de texte lorsqu'on l'envoie (il devrait disparaitre...)
 - si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé
 
-Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
+Et voilà ! Si tout s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
 
 ### Étape 2 : le backend
 
@@ -83,7 +83,7 @@ Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de dat
 
 Dans le cadre de cet atelier, nous allons utiliser [firebase](https://www.firebase.com/) comme base de données, mais [parse](https://parse.com/)+[pusher](https://pusher.com/) ou un backend custom ferait tout aussi bien l'affaire !
 
-Firebase est un Backend as a Service, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur et ce concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
+Firebase est un Backend as a Service, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur et se concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
 
 Tout d'abord, il faut créer une application sur firebase. Tu peux soit créer ta propre application (5 min) soit utiliser l'application que j'ai créé pour l'atelier (https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
 
@@ -100,19 +100,19 @@ Il y a aussi une librairie spéciale pour angular, si tu veux l'utiliser (pas ob
 
 Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https://www.firebase.com/docs/) !
 
-Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
+Pour cette étape, le but sera de créer un service qui s'interface avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
 
 PS: stocker vos messages dans une sous-arborescence, `/default` par exemple (anticipation de la suite).
 
 ### Étape 3 : personnaliser l'utilisateur
 
-Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
+Le chat est fonctionnel mais tous les utilisateurs s'appellent pareil et ont le même avatar :( Il est temps de changer ça !!!
 
 Commençons par son nom. Nous allons créer un service pour gérer les données de l'utilisateur (et les persister en local) et lui permettre de changer son nom. Pour cela, je te propose d'ajouter un bouton dans la barre de header et d'utiliser une [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/).
 
-Voici à quoi ça devrais ressembler : ![Screen step3-1](screenshots/step3-1.png) et ![Screen step3-2](screenshots/step3-2.png)
+Voici à quoi ça devrait ressembler : ![Screen step3-1](screenshots/step3-1.png) et ![Screen step3-2](screenshots/step3-2.png)
 
-Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le même avatar. Comme prendre une photo, la redimentionner, l'uploader sur un serveur et l'afficher en tant qu'avatar utilisateur est un peu complexe, je te propose d'utiliser des [identicon](https://github.com/cupcake/sigil).
+Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le même avatar. Comme prendre une photo, la redimensionner, l'uploader sur un serveur et l'afficher en tant qu'avatar utilisateur est un peu complexe, je te propose d'utiliser des [identicon](https://github.com/cupcake/sigil).
 
 C'est quand même bien mieux comme ça : ![Screen step3-end](screenshots/step3-end.png)
 
@@ -126,13 +126,13 @@ Pour formater des dates, il y a l'excellente librairie [momentjs](http://momentj
 
 Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)
 
-Tant qu'on est sur les petites améliorations, tu as peut être remarqué que messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
+Tant qu'on est sur les petites améliorations, tu as peut être remarqué que les messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
 
 ### Étape 5 : Et si on supprimait des messages ?
 
 Bonne idée ? Mauvaise idée ? En tous cas, on y va !!!
 
-Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'utilisateur fait un appui long dessus. Pour que ce ne soit pas innatendu par l'utilisateur, un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) pourrait être le bienvenu :)
+Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'utilisateur fait un appui long dessus. Pour que ce ne soit pas inattendu par l'utilisateur, un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) pourrait être le bienvenu :)
 
 ![Screen step5](screenshots/step5.png)
 
@@ -168,11 +168,11 @@ C'était simple non ?
 
 Sympa l'application non ? Faisons une petite pause dans les fonctionnalités pour s'occuper de ce qu'il y a "autour". Et notamment de l'icône et de l'image de lancement (splash screen). Ca tombe bien, Ionic nous [facilite grandement la tâche](http://ionicframework.com/docs/cli/icon-splashscreen.html) avec la CLI. Voici [un](https://www.google.fr/search?q=chat+icon&tbm=isch) [peu](https://www.google.fr/search?q=chat+bubble+icon&tbm=isch) [d'](https://www.google.fr/search?q=discussion&tbm=isch)[inspiration](https://www.google.fr/search?q=forum&tbm=isch).
 
-Pour ceux qui sont sous Android, ne vous inquiétez pas si le logo ne change pas... Android gère mal de changement de logo d'une application. Pour voir votre nouvelle icône, il suffit de désinstaller l'application et de la réinstaller.
+Pour ceux qui sont sous Android, ne vous inquiétez pas si le logo ne change pas... Android gère mal le changement de logo d'une application. Pour voir votre nouvelle icône, il suffit de désinstaller l'application et de la réinstaller.
 
 ### Étape 10 : Add native plugins (Toast, Dialog)
 
-On a bien taffé mais au final, on ne fait pas grand chose de plus qu'un site web... Bon ok, on va maintenant ajouter quelques plugins pour rendre les choses plus sympa. Pour note, l'équipe de Ionic a lancé un projet bien sympa [ngCordova](http://ngcordova.com/) mais pour cette fois-ci, on va y aller à l'ancienne ;)
+On a bien taffé mais au final, on ne fait pas grand chose de plus qu'un site web... Bon ok, on va maintenant ajouter quelques plugins pour rendre les choses plus sympas. Pour note, l'équipe de Ionic a lancé un projet bien sympa [ngCordova](http://ngcordova.com/) mais pour cette fois-ci, on va y aller à l'ancienne ;)
 
 Voici les plugins qui peuvent être intéressants pour notre application :
 
