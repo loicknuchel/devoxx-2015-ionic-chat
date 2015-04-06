@@ -1,36 +1,45 @@
 # Faire un chat avec Ionic & Firebase
 ##### Par [Loïc Delmaire](https://twitter.com/loicdelmaire) & [Loïc Knuchel](http://loic.knuchel.org/)
 
-**Prérequis** : Les participants doivent connaitre un minimum de JavaScript et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions
+**Prérequis** : Les participants doivent connaitre un minimum de JavaScript
+et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions
 
 ### L'application à développer
 
-L'objectif de ce [Hands on Lab](http://cfp.devoxx.fr/2015/talk/JDN-0259/3h_pour_creer_votre_application_mobile_de_chat) est de faire coder aux participants une application mobile de chat en utilisant Ionic Framework (Cordova et Angular) et Firebase comme backend.
+L'objectif de ce [Hands on Lab](http://cfp.devoxx.fr/2015/talk/JDN-0259/3h_pour_creer_votre_application_mobile_de_chat)
+est de faire coder aux participants une application mobile de chat en utilisant [Ionic Framework](http://ionicframework.com/)
+(Cordova et Angular) et [Firebase](https://www.firebase.com/) comme backend.
 
-Les premières étapes sont la mise en place d'un MVP fonctionnel puis l'enrichissement progressif de celui-ci avec différentes fonctionnalités :
+Les premières étapes sont la mise en place d'un MVP fonctionnel puis l'enrichissement progressif
+de celui-ci avec différentes fonctionnalités :
 
-- changement de pseudo
-- multi-room
-- support des avatar
-- support du markdown
-- changer l'icone de l'application
+* Changement de pseudo
+* Multi-channels
+* Support des avatars
+* Support du markdown
+* Changement del'icone de l'application
 
 ### Informations
 
 Ressources utiles :
 
-- [Ionic Framework docs](http://ionicframework.com/docs/)
-- [Angular API](https://docs.angularjs.org/api)
+* [Ionic Framework docs](http://ionicframework.com/docs/)
+* [Angular API](https://docs.angularjs.org/api)
 
 ### Installation
 
-Les participants doivent avoir installé leur environnement au préalable et exécuté le template de base de ce repo (branche master). Pour cela, le mieux est de suivre le [Getting Started](http://ionicframework.com/getting-started/) de Ionic framework puis cloner ce repo et lancer les commandes suivantes :
+Les participants doivent avoir installé leur environnement au préalable et exécuté le
+template de base de ce repo (branche master).
+
+Pour cela, le mieux est de suivre le [Getting Started](http://ionicframework.com/getting-started/)
+de Ionic framework puis cloner ce repo (`git clone
+https://github.com/loicknuchel/devoxx-2015-ionic-chat.git`) et lancer les commandes suivantes :
 
 ```
-npm install
-bower install
-cordova platform add [android/ios]
-ionic run
+npm install # Installation des dépendances liées à nodejs
+bower install # Installation des dépendances liées au front
+cordova platform add <android|ios> # Ajout des sources pour compiler sur
+ionic run <android|ios> # Lancement de l'application sur un device connecté à l'ordinateur
 ```
 
 ### Étape 0 : mise en place de la structure de l'application
@@ -49,11 +58,22 @@ Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réell
 
 Voici le résultat que tu devrais obtenir : ![Screen setp0](screenshots/step0.png)
 
-### Étape 1 : création de l'interface
+### Étape 1 : Création de l'interface minimale
 
-Il y a deux éléments principaux dans une application de chat, la liste des messages et le champ de texte pour envoyer un nouveau message.
+**Objectif**
 
-Commençons par la liste des messages. Tout d'abord, il va falloir prendre des données pour voir à quoi ressemblera cette liste. Voici quelques messages de test :
+Implémenter les éléments graphiques :
+
+* la liste des messages avec l'avater et le nom du créateur
+* le champ de texte pour envoyer un nouveau message
+
+**Ressources**
+
+*Pour les messages*, ionic fournit des composants CSS permettant d'afficher des
+listes avec des avatars : [Iteam Avatars](http://ionicframework.com/docs/components/#item-avatars)
+
+Voici un jeu de messages test à ajouter dans le contrôleur:
+
 ```javascript
 [
     {user: {avatar: 'http://ionicframework.com/img/docs/venkman.jpg', name: 'Venkman'}, content: 'Back off, man. I\'m a scientist.'},
@@ -66,55 +86,104 @@ Commençons par la liste des messages. Tout d'abord, il va falloir prendre des d
 ]
 ```
 
-Tu as une super liste ? Bravo !
+*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers
+types de footer : [Footer](http://ionicframework.com/docs/components/#footer) et
+[Bar input](http://ionicframework.com/docs/components/#bar-inputs).
 
-Maintenant nous allons pouvoir créer le champ de text pour envoyer un nouveau message et créer une fonction pour envoyer le message écrit (c'est à dire, l'ajouter à la liste des messages affichés).
-
-Bon, ça commence à prendre forme ! Mais à y regarder d'un peu plus près, il y a quelques petits problèmes UX... Si tu veux les régler, c'est bonus !
-
-- le message reste dans le champ de texte lorsqu'on l'envoi (il devrait disparaitre...)
-- si on appuie sur Enter (sur le PC) ou sur Ok (sur le mobile), le message n'est pas envoyé
+Pour l'ajouter automatiquement à la liste des messages, il faut implémenter une
+fonction ``sendMessage(message)`` dans le contrôleur.
 
 Et voilà ! Si tu s'est bien passé tu devrais avoir quelque chose comme : ![Screen step1](screenshots/step1-end.png)
 
+[Lien vers la correction](https://gist.github.com/skelz0r/52004bdc808c411086f1)
+
 ### Étape 2 : le backend
 
-Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone, pas encore moyen de communiquer... Réglons ce problème et attaquons nous maintenant au backend.
+Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous
+verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone,
+pas encore moyen de communiquer...
 
-Dans le cadre de cet atelier, nous allons utiliser [firebase](https://www.firebase.com/) comme base de données, mais [parse](https://parse.com/)+[pusher](https://pusher.com/) ou un backend custom ferait tout aussi bien l'affaire !
+Réglons ce problème et attaquons nous maintenant au backend.
 
-Firebase est un Backend as a Service, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur et ce concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
+Dans le cadre de cet atelier, nous allons utiliser [Firebase](https://www.firebase.com/) comme base de données
+(à noter que [Parse](https://parse.com/)+[Pusher](https://pusher.com/) ou un backend
+custom ferait tout aussi bien l'affaire !).
 
-Tout d'abord, il faut créer une application sur firebase. Tu peux soit créer ta propre application (5 min) soit utiliser l'application que j'ai créé pour l'atelier (https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
+Firebase est un *Backend as a Service*, c'est une sorte de base de donnée hébergée et accessible via une API.
+Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement d'un serveur
+et se concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
 
-Ensuite, il faut installer la librairie firebase :
+Tout d'abord, il faut créer une application sur Firebase.
+Au choix, tu peux soit créer ta propre application (5 min) soit utiliser l'application que
+j'ai créé pour l'atelier : https://chat-devoxx-2015.firebaseio.com/). Si tu utilises l'application de
+l'atelier, pense à ajouter un namespace pour ne pas avoir de collision avec les autres
+(ex: https://chat-devoxx-2015.firebaseio.com/myname/).
 
-- télécharger la librairie : `bower install firebase --save` (merci bower !)
-- l'inclure de la index.html : `<script src="lib/firebase/firebase.js"></script>`
+**Installation**
 
-Il y a aussi une librairie spéciale pour angular, si tu veux l'utiliser (pas obligé) il faut aussi :
+Nous allons utiliser la librairie spéciale pour angular de Firebase:
 
-- la télécharger : `bower install angularfire --save`
-- l'inclure dans le index.html `<script src="lib/angularfire/dist/angularfire.js"></script>`
-- et enfin, l'ajouter un dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])`
+1. Télécharger les librairies (firebase et angularfire) : `bower install firebase angularfire --save` (merci bower !)
+2. Les inclure dans le *index.html* :
+   ```
+   <script src="lib/firebase/firebase.js"></script>
+   <script src="lib/angularfire/dist/angularfire.js"></script>
+   ```
+3. Ajouter 'firebase' en dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])`
 
-Ceci étant fait, il est temps d'aller voir la [documentation de firebase](https://www.firebase.com/docs/) !
+**Objectif**
 
-Pour cette étape, le but sera de créer un service qui s'intervace avec firebase (en utilisant angularfire ou pas) et de le lier avec le contrôlleur de l'application.
+Implémenter un service `RoomSrv` qui aura deux méthodes:
 
-PS: stocker vos messages dans une sous-arborescence, `/default` par exemple (anticipation de la suite).
+* `getMessage()` qui retournera la liste des messages ;
+* `sendMessage(message, messages)` avec `message` le nouveau message et
+  `messages` la liste des messages
 
-### Étape 3 : personnaliser l'utilisateur
+Ce service s'interfaçera bien entendue avec Firebase.
+On utilisera des [FirebaseArray](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray)
 
-Le chat est fonctionnel mais tous les utilisateurs s'appelle pareil et ont le même avatar :( Il est temps de changer ça !!!
+L'URL devra être namespacé avec votre nom et le 'default' :
+`https://chat-devoxx-2015.firebaseio.com/name/default/`
 
-Commençons par son nom. Nous allons créer un service pour gérer les données de l'utilisateur (et les persister en local) et lui permettre de changer son nom. Pour cela, je te propose d'ajouter un bouton dans la barre de header et d'utiliser une [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/).
+Ajouter une constante `Config` dans `app.js` dans laquelle vous stockerez l'URL
+ci-dessus.
 
-Voici à quoi ça devrais ressembler : ![Screen step3-1](screenshots/step3-1.png) et ![Screen step3-2](screenshots/step3-2.png)
+Et enfin, remplacer les méthodes du contrôleur par celles du RoomSrv.
 
-Il serait certainement un peu mieux que tous les utilisateurs n'aient pas le même avatar. Comme prendre une photo, la redimentionner, l'uploader sur un serveur et l'afficher en tant qu'avatar utilisateur est un peu complexe, je te propose d'utiliser des [identicon](https://github.com/cupcake/sigil).
+[Lien vers la correction](https://gist.github.com/skelz0r/2cdbfccc02445948987e)
 
-C'est quand même bien mieux comme ça : ![Screen step3-end](screenshots/step3-end.png)
+### Étape 3 : Personnaliser l'utilisateur
+
+Le chat est fonctionnel, mais il est impossible de savoir qui a posté quoi :(
+
+Il est temps de changer ça en permettant de changer son nom et son avatar.
+
+**Objectif**
+
+On va permettre de personnaliser l'utilisateur en:
+
+* ajoutant de quoi modifier le nom ;
+* générer un avatar en fonction de son nom.
+
+Pour cela, il faut implémenter un service `User` qui aura deux méthodes:
+
+* `get()` qui retournera l'utilisateur ;
+* `changeName()` qui fera apparaître une popup ionic, et qui permettra de
+  changer le nom de l'utilisateur
+
+Les changements seront stocké en local à l'aide de `window.localStorage`, vous
+trouverez une implémentation d'un service ici :
+[Storage](https://gist.github.com/skelz0r/7110873b8173dc354303)
+
+Pour l'avatar, on utilisarea [identicon](https://github.com/cupcake/sigil)
+
+**Ressources**
+
+* [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/)
+* [Exemple d'avatar avec le nom 'ionic'](https://sigil.cupcake.io/ionic)
+
+Voici à quoi cela devrait ressembler
+![Screen step3-end](screenshots/step3-end.png)
 
 ### Étape 4 : Ajouter et afficher les dates des messages
 
