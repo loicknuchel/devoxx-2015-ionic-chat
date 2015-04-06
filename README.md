@@ -1,8 +1,7 @@
 # Faire un chat avec Ionic & Firebase
 ##### Par [Loïc Delmaire](https://twitter.com/loicdelmaire) & [Loïc Knuchel](http://loic.knuchel.org/)
 
-**Prérequis** : Les participants doivent connaitre un minimum de JavaScript
-et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions
+**Prérequis** : Les participants doivent connaître un minimum de JavaScript et d'Angular pour pouvoir faire cet atelier dans les meilleures conditions.
 
 ### L'application à développer
 
@@ -17,7 +16,7 @@ de celui-ci avec différentes fonctionnalités :
 * Multi-channels
 * Support des avatars
 * Support du markdown
-* Changement del'icone de l'application
+* Changement de l'icône de l'application
 
 ### Informations
 
@@ -38,7 +37,7 @@ Pour cela, le mieux est de suivre le [Getting Started](http://ionicframework.com
 
 - `npm install` : Installation des dépendances liées à nodejs
 - `bower install` : Installation des dépendances liées au front
-- `cordova platform add <android|ios>` : Ajout des sources pour compiler sur
+- `cordova platform add <android|ios>` : Ajout de la plateforme souhaitée au projet
 - `ionic run <android|ios>` : Lancement de l'application sur un device connecté à l'ordinateur
 
 ### Structure d'une application Ionic
@@ -69,7 +68,7 @@ devoxx-ionic-chat
 +-- package.json      # dépendences nodejs du projet
 ```
 
-Du coup, si vous avez bien suivi, on ne s'occupera du des fichiers dans `www/` pour créer notre application :)
+Du coup, si tu as bien suivi, on ne s'occupera pas des fichiers dans `www/` pour créer notre application :)
 
 ### Étape 0 : mise en place de la structure de l'application
 
@@ -80,7 +79,7 @@ Si tu as cloné ce repo, passe directement à l'étape 1. Si tu souhaites réell
 - si l'application se lance, bravo !!! Tout fonctionne bien ! Sinon... :( Tu peux reprendre le [Getting Started](http://ionicframework.com/getting-started/) ou poser une question sur le [forum Ionic](http://forum.ionicframework.com/)
 - ajoute `www/lib/`, `resources/android/` et `resources/ios/` dans le `.gitignore`
 - renomme l'application angular de 'starter' en 'app'
-- crée les fichiers de contrôleurs et services et inclu les dans l'*index.html*
+- crée les fichiers de contrôleurs et services et inclue-les dans l'*index.html*
 - remplace le contenu du body par un unique [nav view](http://ionicframework.com/docs/api/directive/ionNavView/)
 - crée une [première route](http://ionicframework.com/docs/api/directive/ionNavView/#usage), app, avec son contrôleur et sa vue. La vue comportera simplement une barre de navigation avec un titre et un contenu vierge.
 - lance ton application dans le navigateur et sur ton téléphone :) (`ionic serve` et `ionic run`)
@@ -98,8 +97,7 @@ Implémenter les éléments graphiques :
 
 **Ressources**
 
-*Pour les messages*, ionic fournit des composants CSS permettant d'afficher des
-listes avec des avatars : [Item Avatars](http://ionicframework.com/docs/components/#item-avatars)
+*Pour les messages*, ionic fournit des composants CSS permettant d'afficher des listes avec des avatars : [Item Avatars](http://ionicframework.com/docs/components/#item-avatars)
 
 Voici un jeu de messages test à ajouter dans le contrôleur:
 
@@ -115,9 +113,7 @@ Voici un jeu de messages test à ajouter dans le contrôleur:
 ]
 ```
 
-*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers
-types de footer : [Footer](http://ionicframework.com/docs/components/#footer) et
-[Bar input](http://ionicframework.com/docs/components/#bar-inputs).
+*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers types de footer : [Footer](http://ionicframework.com/docs/components/#footer) et [Bar input](http://ionicframework.com/docs/components/#bar-inputs).
 
 On voudra aussi publier des messages. Pour cela, il faut implémenter une fonction `sendMessage(message)` dans le contrôleur. Cette fonction doit ajouter le message en début de liste avec un 'user' défini en dur pour le moment.
 
@@ -131,17 +127,17 @@ Si tu es perdu, tu peux faire un `git checkout step1`
 
 Bon, c'est encore très rudimentaire (tout le monde s'appelle pareil, pas de date sur les messages...) mais nous verrons tout ça plus tard... Mais le pire c'est que nos messages restent sur le téléphone, pas encore moyen de communiquer...
 
-Réglons ce problème et attaquons nous maintenant au backend.
+Réglons ce problème et attaquons-nous maintenant au backend.
 
 Dans le cadre de cet atelier, nous allons utiliser [Firebase](https://www.firebase.com/) comme base de données (à noter que [Parse](https://parse.com/)+[Pusher](https://pusher.com/) ou un backend custom ferait tout aussi bien l'affaire !).
 
-Firebase est un *Backend as a Service*, c'est une sorte de base de donnée hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement du développement et de l'hébergement du serveur et se concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
+Firebase est un *Backend as a Service*, c'est une sorte de base de données hébergée et accessible via une API. Le gros avantage c'est que si on n'a pas de fonctionnalité 'spéciale' on peut s'affranchir complètement du développement et de l'hébergement du serveur et se concentrer sur le front, le mobile, le design et l'UX !!! Et c'est plutôt cool :D
 
-Tout d'abord, il faut créer une application sur Firebase. Au choix, tu peux soit [créer ta propre application](https://www.firebase.com/) (5 min) soit utiliser l'application que j'ai créé pour l'atelier : `https://chat-devoxx-2015.firebaseio.com/`. Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collisions avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
+Tout d'abord, il faut créer une application sur Firebase. Au choix, tu peux soit [créer ta propre application](https://www.firebase.com/) (5 min) soit utiliser l'application que j'ai créée pour l'atelier : `https://chat-devoxx-2015.firebaseio.com/`. Si tu utilises l'application de l'atelier, pense à ajouter un namespace pour ne pas avoir de collisions avec les autres (ex: https://chat-devoxx-2015.firebaseio.com/myname/).
 
 **Installation**
 
-Nous allons utiliser la librairiede Firebase spéciale pour Angular :
+Nous allons utiliser la librairie de Firebase spéciale pour Angular :
 
 1. Télécharger les librairies (firebase et angularfire) : `bower install firebase angularfire --save` (merci bower !)
 2. Les inclure dans le *index.html* :
@@ -149,7 +145,7 @@ Nous allons utiliser la librairiede Firebase spéciale pour Angular :
    <script src="lib/firebase/firebase.js"></script>
    <script src="lib/angularfire/dist/angularfire.js"></script>
    ```
-3. Ajouter 'firebase' en dépendence de notre application angular `angular.module('app', ['ionic', 'firebase'])` (*app.js*)
+3. Ajouter 'firebase' en dépendance de notre application angular `angular.module('app', ['ionic', 'firebase'])` (*app.js*)
 
 **Objectif**
 
@@ -158,13 +154,13 @@ Implémenter un service `RoomSrv` qui aura deux méthodes:
 * `getMessage()` qui retournera la liste des messages dans firebase
 * `sendMessage(message, messages)` avec `message` le nouveau message et `messages` la liste des messages
 
-Ce service s'interfaçera bien entendue avec Firebase. On utilisera des [FirebaseArray](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray)
+Ce service s'interfaçera bien entendu avec Firebase. On utilisera des [FirebaseArray](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray)
 
 L'URL devra être namespacé avec votre nom et le 'default' : `https://chat-devoxx-2015.firebaseio.com/name/default/` (en prévision de la suite).
 
-Ajouter une constante `Config` dans `app.js` dans laquelle vous stockerez l'URL firebase et que vous pourrez injecter dans les services en ayant besoin.
+Ajouter une constante `Config` dans `app.js` dans laquelle stocker l'URL firebase et que tu pourra injecter dans les services en ayant besoin.
 
-Et enfin, remplacer les méthodes du contrôleur par celles du RoomSrv.
+Et enfin, remplacer les méthodes du contrôleur par celles du `RoomSrv`.
 
 [Lien vers la correction](https://gist.github.com/skelz0r/2cdbfccc02445948987e)
 
@@ -188,9 +184,9 @@ Pour cela, il faut implémenter un service `User` qui aura deux méthodes :
 * `get()` qui retournera l'utilisateur
 * `changeName()` qui fera apparaître une popup ionic, et qui permettra de changer le nom de l'utilisateur
 
-Les changements seront stocké en local à l'aide de `window.localStorage`, vous trouverez une implémentation d'un service ici : [Storage](https://gist.github.com/skelz0r/7110873b8173dc354303)
+Les changements seront stockés en local à l'aide de `window.localStorage`, tu trouveras une implémentation d'un service ici : [Storage](https://gist.github.com/skelz0r/7110873b8173dc354303)
 
-Pour l'avatar, on utilisarea [identicon](https://github.com/cupcake/sigil)
+Pour l'avatar, on utilisera [identicon](https://github.com/cupcake/sigil)
 
 **Ressources**
 
@@ -220,11 +216,11 @@ Pour installer angular-moment il suffit de :
     <script src="lib/moment/locale/fr.js"></script>
     <script src="lib/angular-moment/angular-moment.js"></script>
     ```
-- ajouter le module 'angularMoment' en dépendance de votre application angular (app.js)
+- ajouter le module 'angularMoment' en dépendance de ton application angular (*app.js*)
 
 Voilà le résultat : ![Screen step4-1](screenshots/step4-1.png)
 
-Tant qu'on est sur les petites améliorations, tu as peut être remarqué que messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
+Tant qu'on est sur les petites améliorations, tu as peut être remarqué que les messages sont tronqués à la fin de la première ligne. Aller, un petit coup de CSS pour régler ça ;)
 
 ### Étape 5 : Et si on supprimait des messages ?
 
@@ -234,11 +230,11 @@ Ta tâche, si tu l'acceptes, sera maintenant de supprimer un message lorsque l'u
 
 **Objectif**
 
-- Dans le service `RoomSrv`, créer une fonction `deleteMessage(message, messages)` qui prends le message à supprimer et la collection de message et supprime le message en question ([aide](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-removerecordorindex))
+- Dans le service `RoomSrv`, créer une fonction `deleteMessage(message, messages)` qui prend le message à supprimer et la collection de message et supprime le message en question ([aide](https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-removerecordorindex))
 - Créer une fonction `messageActions(message)` dans le scope qui s'exécute lors d'un [appui long](http://ionicframework.com/docs/api/directive/onHold/) sur un message.
-- La fonction `messageActions(message)` ouvre un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) avec un texte 'Message de Loïc' et deux bouttons 'Supprimer' et 'Annuler'.
+- La fonction `messageActions(message)` ouvre un [ActionSheet](http://ionicframework.com/docs/api/service/$ionicActionSheet/) avec un texte 'Message de Loïc' et deux boutons 'Supprimer' et 'Annuler'.
 - Supprimer le message en question si on clique sur supprimer
-- Dans tous les cas, ('Supprimer' ou 'Annuler'), refermer l'ActionSheet
+- Dans tous les cas, ('Supprimer' ou 'Annuler'), referme l'ActionSheet
 
 ![Screen step5](screenshots/step5.png)
 
@@ -249,12 +245,12 @@ Parler tous ensemble c'est bien mais ce serait bien d'avoir des sujets précis e
 **Etapes**
 
 - Créer un fichier `views/menu.html` qui contiendra le [SideMenu](http://ionicframework.com/docs/api/directive/ionSideMenus/). Mettre un [ion-nav-view](http://ionicframework.com/docs/api/directive/ionNavView/) dans la partie content pour pouvoir y inclure les templates nécessaires. Dans la partie menu, mettre simplement un [header](http://ionicframework.com/docs/api/directive/ionHeaderBar/) et un [content](http://ionicframework.com/docs/api/directive/ionContent/) avec un peu de texte.
-- Dans *app.js*, créer un nouvel état 'app' ayant pour template le `menu.html` et un controlleur `MenuCtrl`. Cet état doit être [abstrait](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#abstract-states).
+- Dans *app.js*, créer un nouvel état 'app' ayant pour template le `menu.html` et un contrôleur `MenuCtrl`. Cet état doit être [abstrait](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#abstract-states).
 - Renommer ensuite l'ancien état 'app' en 'app.room' pour qu'il [dépende de l'état précédent](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#methods-for-nesting-states).
 - Changer le `otherwise` pour qu'il redirige vers */menu/app* au lieu de simplement */app*
 - Ajouter un bouton à gauche pour pouvoir [ouvrir et fermer le SideMenu](http://ionicframework.com/docs/api/directive/menuToggle/).
 
-Les opérations sont moins simple que d'habitude mais si tout se passe bien, le résultat devrait ressembler à ça : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](screenshots/step6-2.png)
+Les opérations sont moins simples que d'habitude mais si tout se passe bien, le résultat devrait ressembler à ça : ![Screen step6-1](screenshots/step6-1.png) et ![Screen step6-2](screenshots/step6-2.png)
 
 ### Étape 7 : Préparation du multi-room : afficher et ajouter des rooms dans le side-menu
 
@@ -266,7 +262,7 @@ Pour accéder aux rooms existantes, l'[API REST](https://www.firebase.com/docs/r
 
 - Créer une fonction `getRooms()` dans `RoomSrv` qui renverra un tableau contenant la liste des rooms existantes
 - Récupérer les rooms existante et les afficher dans une [liste](http://ionicframework.com/docs/components/#list) dans le SideMenu, cela se passe donc dans le `MenuCtrl` et le fichier *menu.html*
-- Modifier l'état `app.room` (*app.js*) pour qu'il prennent le [nom de la room souhaitée en paramètre](https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-parameters)
+- Modifier l'état `app.room` (*app.js*) pour qu'il prenne le [nom de la room souhaitée en paramètre](https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-parameters)
 - Modifier le `AppCtrl` pour que les messages affichés soient ceux de la [room choisie](https://github.com/angular-ui/ui-router/wiki/URL-Routing#stateparams-service). 
 
 Et voilà le résultat : ![Screen step7-1](screenshots/step7-1.png)
@@ -302,9 +298,10 @@ Sympa l'application non ? Faisons une petite pause dans les fonctionnalités pou
 
 **Objectif**
 
-- Trouver une icône (minimum 192x192) et un splash screen (2208x2208) pour votre application (voici [un](https://www.google.fr/search?q=chat+icon&tbm=isch) [peu](https://www.google.fr/search?q=chat+bubble+icon&tbm=isch) [d'](https://www.google.fr/search?q=discussion&tbm=isch)[inspiration](https://www.google.fr/search?q=forum&tbm=isch))
+- Trouver une icône (minimum 192x192) et un splash screen (2208x2208) pour ton application (voici [un](https://www.google.fr/search?q=chat+icon&tbm=isch) [peu](https://www.google.fr/search?q=chat+bubble+icon&tbm=isch) [d'](https://www.google.fr/search?q=discussion&tbm=isch)[inspiration](https://www.google.fr/search?q=forum&tbm=isch))
 - les mettre dans le répertoire `resources`
 - les générer à nouveau : `ionic resources`
+- installer l'application sur ton téléphone (`ionic run`)
 
 Pour ceux qui sont sous Android, ne vous inquiétez pas si le logo ne change pas... Android gère mal le changement de logo d'une application. Pour voir votre nouvelle icône, il suffit de désinstaller l'application et de la réinstaller.
 
