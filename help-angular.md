@@ -186,6 +186,21 @@ Voici quelques exemples :
 
 Bien sûr, toutes ces conventions sont à utiliser judicieusement en fonction du contexte...
 
+
+### Constantes
+
+Angular permet de définir des constantes qui seront injectables dans les autres partie de l'application, comme un service.
+
+Voici la syntaxe :
+
+```javascript
+.constant('Config', {
+    url: 'http://myserver.com'
+});
+```
+
+C'est très pratique pour des configurations globales par exemple !
+
 ### Points d'attention
 
 - **Espace de nom global** : tous les modules Angular utilisent un espace de nom global. Attention donc aux télescopages ! Seul le dernier chargé sera conservé !!! Si vous créez deux contrôleurs ou service du même nom, vous risquez de rigoler ! (et le debug n'est pas évident !)

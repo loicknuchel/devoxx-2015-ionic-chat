@@ -113,7 +113,7 @@ Voici un jeu de messages test à ajouter dans le contrôleur:
 ]
 ```
 
-*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers types de footer : [Footer](http://ionicframework.com/docs/components/#footer) et [Bar input](http://ionicframework.com/docs/components/#bar-inputs).
+*Pour le champ de texte*, on le mettra dans un footer, et encore une fois ionic fournit des composants pour divers types de footer : [Footer](http://ionicframework.com/docs/api/directive/ionFooterBar/) et [Bar input](http://ionicframework.com/docs/components/#bar-inputs).
 
 On voudra aussi publier des messages. Pour cela, il faut implémenter une fonction `sendMessage(message)` dans le contrôleur. Cette fonction doit ajouter le message en début de liste avec un 'user' défini en dur pour le moment.
 
@@ -182,20 +182,15 @@ On va permettre de personnaliser l'utilisateur en:
 Pour cela, il faut implémenter un service `User` qui aura deux méthodes :
 
 * `get()` qui retournera l'utilisateur
-* `changeName()` qui fera apparaître une popup ionic, et qui permettra de changer le nom de l'utilisateur
+* `changeName()` qui fera apparaître une [popup ionic](http://ionicframework.com/docs/api/service/$ionicPopup/), et qui permettra de changer le nom de l'utilisateur
 
 Les changements seront stockés en local à l'aide de `window.localStorage`, tu trouveras une implémentation d'un service ici : [Storage](https://gist.github.com/skelz0r/7110873b8173dc354303)
 
-Pour l'avatar, on utilisera [identicon](https://github.com/cupcake/sigil)
-
-**Ressources**
-
-* [Popup Ionic](http://ionicframework.com/docs/api/service/$ionicPopup/)
-* [Exemple d'avatar avec le nom 'ionic'](https://sigil.cupcake.io/ionic)
+Pour l'avatar, on utilisera [identicon](https://github.com/cupcake/sigil), exemple : [https://sigil.cupcake.io/ionic](https://sigil.cupcake.io/ionic)
 
 Voici à quoi cela devrait ressembler : ![Screen step3-end](screenshots/step3-end.png)
 
-### Étape 4 : Ajouter et afficher les dates des messages
+### Étape 4 : Ajouter et afficher les dates des messages (étape facultative)
 
 Les personnes attentives auront remarqué qu'on n'enregistrait pas les dates des messages et qu'il y a donc un risque qu'ils soient mal ordonnés. Par ailleurs, il peut être sympa de voir quand les messages précédents ont été postés.
 
@@ -277,7 +272,7 @@ Mais ce n'est pas fini, il faut maintenant pouvoir ajouter une nouvelle room.
 
 ![Screen step7-2](screenshots/step7-2.png) et ![Screen step7-4](screenshots/step7-4.png)
 
-### Étape 8 : Markdown support
+### Étape 8 : Markdown support (étape facultative)
 
 L'application commence à être sympa non ? Et si on y ajoutait des styles ? Genre du markdown ?
 
